@@ -5,7 +5,7 @@ Programming Paradigm Assignments
 
 ## 1. `Assignment 01` 
 ------
-*This assignment is to a write a basic calculator in C with modular design of coding with MakeFile
+* This assignment is to a write a basic calculator in C with modular design of coding with MakeFile
 
 ## 2. `Assignment 02`
 ------
