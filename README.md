@@ -15,3 +15,10 @@ Programming Paradigm Assignments
 * Add file can be deployed by runing deploy.sh script
 1. `./deploy.sh /src`
 2. `Open localhost/src/html on your web browser to see the outcome.`
+
+## 3. `Assignment 03`
+-----
+
+* This assignment is to write logger lib in C.
+
+* In order to get idea about it refer to `README.md` file in `assignment-003` folder.
