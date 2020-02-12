@@ -42,7 +42,7 @@ compile_all_tests()
 {
 compile_and_execute tests/function/init_func.c src/logger.c
 compile_and_execute tests/function/setup_logger.c src/logger.c
-#compile_and_execute tests/function/debug.c src/logger.c
+compile_and_execute tests/function/log_func.c src/logger.c
 #compile_and_execute tests/function/warn.c src/logger.c
 #compile_and_execute tests/function/error.c src/logger.c
 #compile_and_execute tests/function/info.c src/logger.c
