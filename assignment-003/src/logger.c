@@ -3,22 +3,44 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
+#include<pthread.h>
+#include<stdbool.h>
+
+bool is_log_obj_created = false;
+pthread_mutex_t obj_lock;
+
 
 l_error init(logger **log)
 {
-	(*log) = (logger*)malloc(sizeof(log));
-	
-	if(*log)
+	/*pthread_mutex_lock(&obj_lock);*/
+	if (is_log_obj_created == false)
 	{
-		
+		(*log) = (logger*)malloc(sizeof(log));
+		if(*log)
+		{
+			is_log_obj_created = true;
+		}
+	}
+	else
+		return FAILURE;
+	/*pthread_mutex_unlock(&obj_lock);*/
+	return SUCCESS;
+}
+
+/*This function is only for debugging purpose*/
+l_error free_logger()
+{
+	if (is_log_obj_created == true)
+	{
+		is_log_obj_created = false;
 		return SUCCESS;
-		
 	}
 	return FAILURE;
 }
 
 void setup_logger(logger** log,char* filename,log_level level)
 {
+	pthread_mutex_lock(&obj_lock);
 	if(init(log)==SUCCESS)
 	{
 		int len;
@@ -28,8 +50,10 @@ void setup_logger(logger** log,char* filename,log_level level)
 
 		(*log)->fp = fopen(filename,"a+");
 		(*log)->level = level;
+	
 	}
-	else
+	pthread_mutex_unlock(&obj_lock);
+
 		return;
 }
 
@@ -68,6 +92,8 @@ const char* getlevel(log_level level)
 
 void logger_(logger *log,char *message,log_level level)
 {
+	pthread_mutex_lock(&obj_lock);
+
 	if (log->level<= level)
 	{
 		switch(level)
@@ -91,6 +117,8 @@ void logger_(logger *log,char *message,log_level level)
 					  break;
 		}
 	}
+	pthread_mutex_unlock(&obj_lock);
+
 	return;
 }
 
