@@ -23,4 +23,6 @@ void info(logger*,char*,log_level);
 void error(logger*,char*,log_level);
 void fatal(logger*,char*,log_level);
 
+/*Debugging purpose*/
+l_error free_logger();
 #endif
