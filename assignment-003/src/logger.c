@@ -88,6 +88,7 @@ const char* getlevel(log_level level)
 			}
 		}
 	}
+	return "DEFAULT";
 }
 
 void logger_(logger *log,char *message,log_level level)
