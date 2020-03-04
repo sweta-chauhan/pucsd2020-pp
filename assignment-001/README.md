@@ -20,7 +20,7 @@ To clean all object files.
 ##### `How to run`
 -----
 
-* ./calc -o <operator> -a <operand> -b <operand>
+* ./calc -o operator -a operand -b operand
 
 
 ##### Author
