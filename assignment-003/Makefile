@@ -1,4 +1,4 @@
-p=/home/sweta/Sweta/MCA/part-III/PP/assignment-003
+p=home/sweta/Sweta/MCA/part-III/PP/assignment-003
 
 
 edit : main.o
@@ -10,7 +10,7 @@ logger.so : logger.o
 logger.o : src/logger.c include/logger.h
 	cc -c -Wall -Werror -fpic src/logger.c
 
-main.o : main.c src/logger.c
+main.o : main.c 
 	cc -c main.c
 
 .PHONY : clean
