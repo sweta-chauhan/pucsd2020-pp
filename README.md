@@ -26,15 +26,8 @@ Programming Paradigm Assignments
 
 * In order to get idea about it refer to `README.md` file in `assignment-003` folder.
 
-## 4. `Assignment 04`
----
-* This assignment is to write connection pool in C.Not Completed
 
-## 5. `Assignment 05`
----
-* This assignment is to implement ORM in Golang.
-
-## 6. `Access Control System`
+## 4. `Access Control System`
 ---
 * This assignment is rest-api server written in golang.
 	* In Backend 
@@ -45,15 +38,15 @@ utility
 		1. Design wireframe for UI to perform backend opertaion.
 		2. Implement UI.
 
-## 7. `Challenge #1`
+## 5. `Challenge #1`
 ---
 	* In this challenge for given codebase we have to understand the data flow of the system.
 
-## 8. `Challenge #2`
+## 6. `Challenge #2`
 ---
 	* In this challenge all `GET,POST,PUT,DELETE` api call is to performed.
 
-## 9. `Challenge #3`
+## 7. `Challenge #3`
 ---
 	* Challenge #3.1
 	----------------
@@ -63,7 +56,7 @@ utility
 	----------------
 		* In this challenge actual UI implementation documentation with screenshot is to submitted. 
 
-## 10. `Challenge #night`
+## 8. `Challenge #night`
 ---
 * In this challenge new object is to created and rest api is to added for it in existing rest-api server.
 
