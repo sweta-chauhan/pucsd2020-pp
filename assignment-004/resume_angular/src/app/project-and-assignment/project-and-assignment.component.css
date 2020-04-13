@@ -1,0 +1,16 @@
+h3{
+	font-family: "Comic Sans MS", cursive, sans-serif,italic;
+	color: blue;
+	background-color:lightgreen;
+	text-align:center;
+}
+ul {
+  background: green;
+  padding: 20px;
+  list-style-type: square;
+}
+
+ul li {
+  background: lightgreen;
+  margin: 5px;
+}

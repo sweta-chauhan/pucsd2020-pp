@@ -1,0 +1,13 @@
+h3{
+	font-family: "Comic Sans MS", cursive, sans-serif,italic;
+	color: blue;
+	background-color:lightgreen;
+	text-align:center;
+}
+
+p{
+	font-family: "Comic Sans MS", cursive, sans-serif,italic;
+	color: black;
+	/*background-color:lightgreen;*/
+	text-align:center;
+}
