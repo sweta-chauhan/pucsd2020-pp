@@ -1,0 +1,45 @@
+<style>
+#users {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#users td, #users th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#users tr:nth-child(even){background-color: #f2f2f2;}
+
+#users tr:hover {background-color: #ddd;}
+
+#users th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: gray;
+  color: white;
+}
+</style>
+<table id="users">
+	<tr>
+		<th>Id</th>
+		<th>First NAme</th>
+		<th>Last Name</th>
+		<th>Email</th>
+		<th>Password</th>
+		<th>Contact Number</th>
+		<th>Updated By</th>
+	</tr>
+	<tr *ngFor="let usr of users ">
+		<td>{{usr?.id}}</td>
+		<td>{{usr?.first_name}}</td>
+		<td>{{usr?.last_name}}</td>
+		<td>{{usr?.email}}</td>
+		<td>{{usr?.password}}</td>
+		<td>{{usr?.contact_number}}</td>
+		<td>{{usr?.updated_by}}</td>
+	</tr>
+
+</table>

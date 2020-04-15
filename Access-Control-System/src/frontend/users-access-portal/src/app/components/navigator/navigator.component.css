@@ -1,0 +1,30 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+h1 {
+color: Blue;
+font-family: arial, sans-serif;
+font-weight: bold;
+margin-top: 0px;
+margin-bottom: 1px;
+text-align: right;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.active-list-item {
+  color: #3F51B5 !important; /* Note: You could also use a custom theme */
+}
