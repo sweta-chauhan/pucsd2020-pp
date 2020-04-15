@@ -27,7 +27,7 @@ func NewUserHandler(conn *sql.DB) *User {
 }
 
 func (user *User) GetHTTPHandler() []*handler.HTTPHandler {
-	log.Printf("Http Handler Redirecting to object based on path..")
+	//log.Printf("Http Handler Redirecting to object based on path..")
 	return []*handler.HTTPHandler{
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "user/{id}", Func: user.GetByID},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPost, Path: "user", Func: user.Create},
@@ -35,12 +35,6 @@ func (user *User) GetHTTPHandler() []*handler.HTTPHandler {
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodDelete, Path: "user/{id}", Func: user.Delete},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "user", Func: user.GetAll},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPatch, Path: "user/{id}", Func: user.Update},
-//		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "data/{id}", Func: user.GetByID},
-//		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPost, Path: "data", Func: user.Create},
-//		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPut, Path: "data/{id}", Func: user.Update},
-//		&handler.HTTPHandler{Authenticated: true, Method: http.MethodDelete, Path: "data/{id}", Func: user.Delete},
-//		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "data", Func: user.GetAll},
-//		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPatch, Path: "data/{id}", Func: user.Update},
 	}
 }
 func (user *User) GetByID(w http.ResponseWriter, r *http.Request) {
