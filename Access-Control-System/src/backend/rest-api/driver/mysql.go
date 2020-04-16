@@ -317,14 +317,13 @@ func GetById(conn *sql.DB, object model.IModel, id int64) (model.IModel, error) 
 	return object, nil
 }
 
+
 func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface{}, error) {
-	//log.Printf("Reading object values from interface type using reflection")
 	rValue := reflect.ValueOf(object)
 	rType := reflect.TypeOf(object)
-
+	fmt.Println(reflect.TypeOf(object).String())
 	columns := []string{}
 	pointers := make([]interface{}, 0)
-
 	for idx := 0; idx < rValue.Elem().NumField(); idx++ {
 		field := rType.Elem().Field(idx)
 		if COLUMN_INGNORE_FLAG == field.Tag.Get("ignore") {
@@ -335,7 +334,6 @@ func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface
 		columns = append(columns, column)
 		pointers = append(pointers, rValue.Elem().Field(idx).Addr().Interface())
 	}
-
 	var queryBuffer bytes.Buffer
 	var params []interface{}
 
@@ -350,14 +348,11 @@ func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface
 	}
 
 	query := queryBuffer.String()
-	//	log.Printf("GetById sql: %s\n", query)
 	row, err := conn.Query(query, params...)
-
 	if nil != err {
 		log.Printf("Error conn.Query: %s\n\tError Query: %s\n", err.Error(), query)
 		return nil, err
 	}
-
 	defer row.Close()
 	objects := make([]interface{}, 0)
 	for row.Next() {
@@ -365,16 +360,14 @@ func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface
 			log.Printf("Error row.Columns(): %s\n\tError Query: %s\n", err.Error(), query)
 			return nil, err
 		}
-
 		err = row.Scan(pointers...)
 		if nil != err {
 			log.Printf("Error: row.Scan: %s\n", err.Error())
 			return nil, err
 		}
-
 		objects = append(objects, object)
 	}
-
+	
 	return objects, nil
 }
 

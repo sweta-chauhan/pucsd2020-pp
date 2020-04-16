@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-
+	//"github.com/gorilla/handlers"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/config"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/driver"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/handler"
@@ -81,7 +81,8 @@ func main() {
 	router.Use(middleware.Logger)
 	//log.Printf("Setting Up router")
 	createRouterGroup(router)
+	//corsObj := handlers.AllowedOrigin([]string{"*"})
 	//log.Printf("to listen and serve getting configuration values")
 	http.ListenAndServe(fmt.Sprintf("%s:%d",
-		config.Config().Host, config.Config().Port), router)
+		config.Config().Host, config.Config().Port),router)
 }
