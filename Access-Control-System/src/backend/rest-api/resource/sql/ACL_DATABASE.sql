@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS user_type_domain (
 CREATE TABLE IF NOT EXISTS permission_bit (
 	permission_id 	INT NOT NULL PRIMARY KEY,
 	read TINYINT(1)  NOT NULL DEFAULT 0,
-	write TINYINT(1)  NOT NULL DEFAULT 0,
+	write TINYINT(1)  NOT NULL DEFAULT 0
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 /*This table is created to generality to the database resource type.
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS resource_info (
     creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
     last_update         DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	FOREIGN KEy (owner)	REFERENCES user_detail(id),
-	FOREIGN KEY (resource_type_id) REFERENCES resource_type_domain(resource_type_id),
+	FOREIGN KEY (resource_type_id) REFERENCES resource_type_domain(resource_type_id)
 
 )ENGINE = INNODB CHARACTER SET=utf8;
 
