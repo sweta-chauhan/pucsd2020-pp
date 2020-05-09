@@ -21,15 +21,8 @@ CREATE TABLE IF NOT EXISTS user_type_domain (
 
 CREATE TABLE IF NOT EXISTS permission_bit (
 	permission_id 	INT NOT NULL PRIMARY KEY,
-	u_read TINYINT(1)  NOT NULL DEFAULT 0,
-	u_write TINYINT(1)  NOT NULL DEFAULT 0,
-	u_execute TINYINT(1)  NOT NULL DEFAULT 0,
-	g_read TINYINT(1)  NOT NULL DEFAULT 0,
-	g_write TINYINT(1)  NOT NULL DEFAULT 0,
-	g_execute TINYINT(1)  NOT NULL DEFAULT 0,
-	o_read TINYINT(1)  NOT NULL DEFAULT 0,
-	o_write TINYINT(1)  NOT NULL DEFAULT 0,
-	o_execute TINYINT(1)  NOT NULL DEFAULT 0
+	read TINYINT(1)  NOT NULL DEFAULT 0,
+	write TINYINT(1)  NOT NULL DEFAULT 0,
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 /*This table is created to generality to the database resource type.
@@ -79,7 +72,8 @@ CREATE TABLE IF NOT EXISTS user_detail (
     id                  INT         AUTO_INCREMENT      PRIMARY KEY,
 	first_name          VARCHAR(25)    NOT NULL,
     last_name           VARCHAR(25)    NOT NULL,
-    email               VARCHAR(64)    NOT NULL UNIQUE,
+    username			VARCHAR(25)  NOT NULL UNIQUE,
+	email               VARCHAR(64)    NOT NULL UNIQUE,
     password            VARBINARY(255)    NOT NULL,
 	is_sudo_access		TINYINT(1)  NOT NULL DEFAULT 0,
     creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
@@ -106,7 +100,9 @@ CREATE TABLE IF NOT EXISTS resource_info (
     creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
     last_update         DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	FOREIGN KEy (owner)	REFERENCES user_detail(id),
-	FOREIGN KEY (resource_type_id) REFERENCES resource_type_domain(resource_type_id)
+	FOREIGN KEY (resource_type_id) REFERENCES resource_type_domain(resource_type_id),
+	FOREIGN KEY (permission_id) REFERENCES permission_bit(permission_id)
+
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 
