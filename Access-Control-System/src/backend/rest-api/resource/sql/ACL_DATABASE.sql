@@ -101,7 +101,6 @@ CREATE TABLE IF NOT EXISTS resource_info (
     last_update         DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	FOREIGN KEy (owner)	REFERENCES user_detail(id),
 	FOREIGN KEY (resource_type_id) REFERENCES resource_type_domain(resource_type_id),
-	FOREIGN KEY (permission_id) REFERENCES permission_bit(permission_id)
 
 )ENGINE = INNODB CHARACTER SET=utf8;
 
