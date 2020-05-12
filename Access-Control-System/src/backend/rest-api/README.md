@@ -14,7 +14,7 @@ Details must be checked and put in rest-api.cfg file
 
 cd /etc
 mkdir myproject
-cp resource/config/rest-api.cfg /etc/myproject/rest-api.cfg
+cp resource/config/configuration.cfg /etc/myproject/configuration.cfg
 
 ```
 
