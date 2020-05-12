@@ -17,11 +17,13 @@ func NewResourceRepository(conn *sql.DB) *resourceRepository {
 
 func (resource *resourceRepository) GetByID(cntx context.Context, id int64) (interface{}, error) {
 	obj := new(model.Resource)
+	/*lines to get resource content from server*/
 	return driver.GetById(resource.conn, obj, id)
 }
 
 func (resource *resourceRepository) Create(cntx context.Context, obj interface{}) (interface{}, error) {
 	usr := obj.(model.Resource)
+	/*lines to create resource on server*/
 	result, err := driver.Create(resource.conn, &usr)
 	if nil != err {
 		return 0, err
@@ -34,13 +36,14 @@ func (resource *resourceRepository) Create(cntx context.Context, obj interface{}
 
 func (resource *resourceRepository) Update(cntx context.Context, obj interface{}) (interface{}, error) {
 	usr := obj.(model.Resource)
-	
+	/*lines to add lines in resource on server*/
 	err := driver.UpdateById(resource.conn, &usr)
 	return obj, err
 }
 
 func (resource *resourceRepository) Delete(cntx context.Context, id int64) error {
 	obj := &model.Resource{Id: id}
+	/*Lines to delete file over the server*/
 	return driver.SoftDeleteById(resource.conn, obj, id)
 }
 
