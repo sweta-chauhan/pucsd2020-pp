@@ -1,7 +1,7 @@
 package model
 
 type GroupUser struct {
-    Id		  int64   `json:"group_id" column:"gid"`
+    Id		  int64   `json:"group_id" column:"id"`
     UserId		  int64   `json:"user_id" column:"user_id"`
 }
 

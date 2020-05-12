@@ -1,7 +1,7 @@
 package model
 
 type Group struct {
-	Id            int64  `json:"id,omitempty" key:"primary" autoincr:"1" column:"gid"`
+	Id            int64  `json:"id,omitempty" key:"primary" autoincr:"1" column:"id"`
 	GroupName     string `json:"gname" column:"group_name"`
 }
 
