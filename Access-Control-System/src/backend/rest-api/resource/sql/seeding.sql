@@ -19,7 +19,7 @@ insert into resource_type_domain values(2,"Folder");
 insert into group_info(group_name) values('root');
 
 /*Resource seeding*/
-insert into resource_info (resource_type_id,parent_resource_id,resource_name,location,owner) values(2,0,'ACL_DISK','/home/sweta/ACL',1);
+insert into resource_info (resource_type_id,parent_resource_id,resource_name,location,owner) values(2,0,'ACL','rest-api',1);
 
 /*Group User seeding*/
 

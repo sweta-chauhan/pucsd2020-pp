@@ -45,8 +45,8 @@ CREATE TABLE IF NOT EXISTS resource_info (
 	owner		INT NOT NULL,
     creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
     last_update         DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	FOREIGN KEy (owner)	REFERENCES user_detail(id),
-	FOREIGN KEY (resource_type_id) REFERENCES resource_type_domain(id),
+	FOREIGN KEy (owner)	REFERENCES user_detail(id) ON DELETE CASCADE,
+	FOREIGN KEY (resource_type_id) REFERENCES resource_type_domain(id) ON DELETE CASCADE,
 	UNIQUE (parent_resource_id,resource_name)
 )ENGINE = INNODB CHARACTER SET=utf8;
 
@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS group_user (
     user_id          	INT    NOT NULL,
 	creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
 	last_update         DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,	
-	FOREIGN KEY (user_id) REFERENCES user_detail(id),
-	FOREIGN KEY (id) REFERENCES group_info(id),
+	FOREIGN KEY (user_id) REFERENCES user_detail(id) ON DELETE CASCADE ,
+	FOREIGN KEY (id) REFERENCES group_info(id) ON DELETE CASCADE,
 	PRIMARY KEY (id,user_id)
 
 )ENGINE = INNODB CHARACTER SET=utf8;
@@ -65,18 +65,18 @@ CREATE TABLE IF NOT EXISTS user_access_entry (
     resource_id      INT NOT NULL,
     id          INT   NOT NULL,
 	pid   INT NOT NULL,/*Access on file like read,write,all,etc.*/
-	FOREIGN KEY (id) REFERENCES user_detail(id),
-	FOREIGN KEY (resource_id) REFERENCES resource_info(id),
-	FOREIGN KEY (pid) REFERENCES permission_bit(id),
+	FOREIGN KEY (id) REFERENCES user_detail(id) ON DELETE CASCADE,
+	FOREIGN KEY (resource_id) REFERENCES resource_info(id) ON DELETE CASCADE,
+	FOREIGN KEY (pid) REFERENCES permission_bit(id) ON DELETE CASCADE,
 	PRIMARY KEY (resource_id,id)
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS group_access_entry (
-    resource_id      INT NOT NULL,
+    resource_id INT NOT NULL,
     id          INT   NOT NULL,/*Group Id*/
 	pid   INT NOT NULL,/*Access on file like read,write,all,etc.*/
-	FOREIGN KEY (id) REFERENCES group_info(id),
-	FOREIGN KEY (resource_id) REFERENCES resource_info(id),
-	FOREIGN KEY (pid) REFERENCES permission_bit(id),
+	FOREIGN KEY (id) REFERENCES group_info(id) ON DELETE CASCADE,
+	FOREIGN KEY (resource_id) REFERENCES resource_info(id) ON DELETE CASCADE,
+	FOREIGN KEY (pid) REFERENCES permission_bit(id) ON DELETE CASCADE,
 	PRIMARY KEY (resource_id,id)
 )ENGINE = INNODB CHARACTER SET=utf8;
