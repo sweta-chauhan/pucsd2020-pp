@@ -2,7 +2,6 @@ package repository
 
 import (
 	"context"
-	//"fmt"
 )
 
 type IRepository interface {
@@ -16,12 +15,15 @@ type IRepository interface {
 type Repository struct {
 }
 
+func (repo *Repository) GetByUsername(cntx context.Context, id string) (obj interface{}, err error){
+	return
+}
+
 func (repo *Repository) GetByID(cntx context.Context, id int64) (obj interface{}, err error) {
 	return
 }
 
 func (repo *Repository) Create(cntx context.Context, obj interface{}) (cobj interface{}, err error) {
-	//fmt.Println("Problem Kya hai")
 	return
 }
 
@@ -34,5 +36,9 @@ func (repo *Repository) Delete(cntx context.Context, id int64) (deleted bool, er
 }
 
 func (repo *Repository) GetAll(cntx context.Context) (obj []interface{}, err error) {
+	return
+}
+
+func (repo *Repository) JoinTwo(cntx context.Context, obj1 interface{}, obj2 interface{}, id int64) (obj interface{}, err error){
 	return
 }
