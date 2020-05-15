@@ -32,24 +32,19 @@ func NewMysqlConnection(cfg config.MysqlConnection) (*sql.DB, error) {
 	}
 
 	if cfg.IdleConnection > 0 {
-		//log.Printf("Checking Idle connection")
-
 		db.SetMaxIdleConns(cfg.IdleConnection)
 	}
 	if cfg.MaxConnection > 0 {
-		//log.Printf("Checking max connection")
-
+		
 		db.SetMaxOpenConns(cfg.MaxConnection)
 	}
-	//log.Printf("Setting Connection lifeline")
-
+	
 	db.SetConnMaxLifetime(time.Second * CONN_MAX_LIFETIME)
 
 	if err := db.Ping(); err != nil {
 		log.Fatalf("Failed to ping mysql: %v", err)
 	}
-	//log.Printf("return either database driver connection ")
-
+	
 	return db, err
 }
 
@@ -67,8 +62,7 @@ func GetPlaceHolder(count int) string {
  */
 func Create(conn *sql.DB, object model.IModel) (sql.Result, error) {
 	
-	//log.Printf("Reading object values from interface type using reflection")
-
+	
 	rValue := reflect.ValueOf(object)
 	rType := reflect.TypeOf(object)
 	columns := []string{}
@@ -300,6 +294,70 @@ func GetById(conn *sql.DB, object model.IModel, id int64) (model.IModel, error) 
 	}
 
 	return object, nil
+}
+
+func GetByAnyCol(conn *sql.DB, object model.IModel, colname string,value interface{}) ([]interface{}, error) {
+	rValue := reflect.ValueOf(object)
+	rType := reflect.TypeOf(object)
+
+	columns := []string{}
+	pointers := make([]interface{}, 0)
+
+	for idx := 0; idx < rValue.Elem().NumField(); idx++ {
+		field := rType.Elem().Field(idx)
+		if COLUMN_INGNORE_FLAG == field.Tag.Get("ignore") {
+			continue
+		}
+
+		column := field.Tag.Get("column")
+		columns = append(columns, column)
+		pointers = append(pointers, rValue.Elem().Field(idx).Addr().Interface())
+	}
+
+	var queryBuffer bytes.Buffer
+
+	queryBuffer.WriteString("SELECT ")
+	queryBuffer.WriteString(strings.Join(columns, ", "))
+	queryBuffer.WriteString(" FROM ")
+	queryBuffer.WriteString(object.Table())
+	queryBuffer.WriteString(" WHERE ")
+	queryBuffer.WriteString(colname)
+	queryBuffer.WriteString(" = ? ")
+
+	query := queryBuffer.String()
+	row, err := conn.Query(query, value)
+
+	if nil != err {
+		log.Printf("Error conn.Query: %s\n\tError Query: %s\n", err.Error(), query)
+		return nil, err
+	}
+
+	defer row.Close()
+	objects := make([]interface{}, 0)
+	
+	cols, err := row.Columns() // Remember to check err afterwards
+	
+	
+	for row.Next() {
+		if nil != err {
+			log.Printf("Error row.Columns(): %s\n\tError Query: %s\n", err.Error(), query)
+			return nil, err
+		}
+		vals := make([]interface{}, len(cols))
+		writeCols := make([]string, len(cols))
+		for i, _ := range cols {
+			vals[i] = &writeCols[i]
+		}		
+		err = row.Scan(vals...)
+		if nil != err {
+
+			log.Printf("Error: row.Scan: %s\n", err.Error())
+			return nil, err
+		}
+		objects = append(objects, vals)
+	}
+	
+	return objects, nil
 }
 
 func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface{}, error) {
