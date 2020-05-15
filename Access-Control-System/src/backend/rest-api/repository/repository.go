@@ -8,8 +8,9 @@ type IRepository interface {
 	GetByID(context.Context, int64) (interface{}, error)
 	Create(context.Context, interface{}) (interface{}, error)
 	Update(context.Context, interface{}) (interface{}, error)
-	Delete(context.Context, int64) error
+	Delete(context.Context, int64) (interface{}, error)
 	GetAll(context.Context) ([]interface{}, error)
+	GetByAnyCol(context.Context, string, interface{}) ([]interface{}, error)
 }
 
 type Repository struct {
