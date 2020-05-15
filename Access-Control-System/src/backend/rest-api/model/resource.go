@@ -7,6 +7,7 @@ type Resource struct {
 	ResourceName  string  `json:"rname" column:"resource_name"`
 	ResourcePath  string  `json:"rpath" column:"location"`
 	Owner		  int64   `json:"owner" column:"owner"`
+	Data		  string  `json:"datefield" column:"creation_date"`
 }
 
 func (resource *Resource) Table() string {
