@@ -1,6 +1,8 @@
 package user
 
 import (		
+	"os"
+	//"fmt"
 	"context"
 	"database/sql"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/driver"
@@ -24,6 +26,7 @@ func (resource *resourceRepository) GetByID(cntx context.Context, id int64) (int
 func (resource *resourceRepository) Create(cntx context.Context, obj interface{}) (interface{}, error) {
 	usr := obj.(model.Resource)
 	/*lines to create resource on server*/
+	os.Create(usr.ResourcePath+"/"+usr.ResourceName)
 	result, err := driver.Create(resource.conn, &usr)
 	if nil != err {
 		return 0, err
@@ -51,3 +54,4 @@ func (resource *resourceRepository) GetAll(cntx context.Context) ([]interface{},
 	obj := &model.Resource{}
 	return driver.GetAll(resource.conn, obj, 0, 0)
 }
+

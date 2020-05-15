@@ -48,3 +48,4 @@ func (rtype *rtypeRepository) GetAll(cntx context.Context) ([]interface{}, error
 	obj := &model.ResourceType{}
 	return driver.GetAll(rtype.conn, obj, 0, 0)
 }
+

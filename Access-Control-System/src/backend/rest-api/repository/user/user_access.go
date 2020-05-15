@@ -48,3 +48,4 @@ func (useraccess *useraccessRepository) GetAll(cntx context.Context) ([]interfac
 	obj := &model.UserAccessEntry{}
 	return driver.GetAll(useraccess.conn, obj, 0, 0)
 }
+

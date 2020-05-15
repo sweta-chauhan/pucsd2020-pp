@@ -48,3 +48,4 @@ func (groupuser *groupuserRepository) GetAll(cntx context.Context) ([]interface{
 	obj := &model.GroupUser{}
 	return driver.GetAll(groupuser.conn, obj, 0, 0)
 }
+

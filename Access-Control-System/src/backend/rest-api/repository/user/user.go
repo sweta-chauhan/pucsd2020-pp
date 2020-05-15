@@ -48,3 +48,4 @@ func (user *userRepository) GetAll(cntx context.Context) ([]interface{}, error) 
 	obj := &model.User{}
 	return driver.GetAll(user.conn, obj, 0, 0)
 }
+

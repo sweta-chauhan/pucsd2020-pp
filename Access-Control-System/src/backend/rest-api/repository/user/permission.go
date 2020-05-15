@@ -48,3 +48,4 @@ func (permission *permissionRepository) GetAll(cntx context.Context) ([]interfac
 	obj := &model.Permission{}
 	return driver.GetAll(permission.conn, obj, 0, 0)
 }
+
