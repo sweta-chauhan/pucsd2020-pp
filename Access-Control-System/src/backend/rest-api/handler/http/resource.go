@@ -44,8 +44,11 @@ func (resource *Resource) GetByID(w http.ResponseWriter, r *http.Request) {
 		}
 		
 		grp, err = resource.repo.GetByID(r.Context(), id)
+
 		break
 	}
+	//grp.="Hello Welcome to this world."
+	
 	handler.WriteJSONResponse(w, r, grp, http.StatusOK, err)
 }
 
@@ -67,9 +70,7 @@ func (resource *Resource) Update(w http.ResponseWriter, r *http.Request) {
 	id,_ := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	grp := model.Resource{}
 	err := json.NewDecoder(r.Body).Decode(&grp)
-	var grp_info interface{}
-	grp_info, err = resource.repo.GetByID(r.Context(), id)
-	fmt.Println(grp_info)
+	fmt.Println(grp)
 	for {
 		if nil != err {
 			break
