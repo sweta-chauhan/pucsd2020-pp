@@ -8,6 +8,7 @@ import (
 	"database/sql"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/driver"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/model"
+	"io/ioutil"
 )
 
 type resourceRepository struct {
@@ -19,8 +20,19 @@ func NewResourceRepository(conn *sql.DB) *resourceRepository {
 }
 
 func (resource *resourceRepository) GetByID(cntx context.Context, id int64) (interface{}, error) {
-	obj := new(model.Resource)
-	return driver.GetById(resource.conn, obj, id)
+	obj := new(model.Resource) 
+	var result interface{}
+	result,err := driver.GetById(resource.conn, obj, id)
+	if obj.ResourceType == 1 {
+		basepath := obj.ResourcePath
+		filename := obj.ResourceName
+		data, err := ioutil.ReadFile(filepath.Join(basepath,filename))
+  		if err != nil {
+    		return nil,err
+  		}
+		obj.Data = string(data)
+	}
+	return result,err 
 }
 
 func (resource *resourceRepository) Create(cntx context.Context, obj interface{}) (interface{}, error) {
@@ -58,9 +70,21 @@ func (resource *resourceRepository) Create(cntx context.Context, obj interface{}
 
 func (resource *resourceRepository) Update(cntx context.Context, obj interface{}) (interface{}, error) {
 	usr := obj.(model.Resource)
-	
+	//var result interface{}
+	var data string
+	data = usr.Data
+	driver.GetById(resource.conn, &usr, usr.Id)
+	if usr.ResourceType == 1 {
+		basepath := usr.ResourcePath
+		filename := usr.ResourceName
+		//fmt.Println(usr.Data)
+		err := ioutil.WriteFile(filepath.Join(basepath,filename), []byte(data), 0644)
+  		if err != nil {
+    		return nil,err
+  		}
+	}
 	err := driver.UpdateById(resource.conn, &usr)
-	return obj, err
+	return obj,err 
 }
 
 func (resource *resourceRepository) Delete(cntx context.Context, id int64) (interface{}, error) {
