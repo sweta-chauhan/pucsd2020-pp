@@ -5,19 +5,19 @@ CREATE DATABASE Access_Control_List;
 USE Access_Control_List;
 
 CREATE TABLE IF NOT EXISTS permission_bit (
-	permission_id 	INT NOT NULL PRIMARY KEY,
+	id 	INT NOT NULL PRIMARY KEY,
 	p_read TINYINT(1)  NOT NULL DEFAULT 0,
 	p_write TINYINT(1)  NOT NULL DEFAULT 0
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS resource_type_domain (
-    resource_type_id   INT  PRIMARY KEY,
+    id   INT  PRIMARY KEY,
     description   VARCHAR(25)    NOT NULL
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS group_info (
-    gid                  INT         AUTO_INCREMENT      PRIMARY KEY,
+    id                  INT         AUTO_INCREMENT      PRIMARY KEY,
     group_name          VARCHAR(25)    NOT NULL, 
 	creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
     last_update         DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -46,36 +46,37 @@ CREATE TABLE IF NOT EXISTS resource_info (
     creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
     last_update         DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	FOREIGN KEy (owner)	REFERENCES user_detail(id),
-	FOREIGN KEY (resource_type_id) REFERENCES resource_type_domain(resource_type_id),
+	FOREIGN KEY (resource_type_id) REFERENCES resource_type_domain(id),
 	UNIQUE (parent_resource_id,resource_name)
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS group_user (
-    gid                 INT NOT NULL,
+    id                 INT NOT NULL,
     user_id          	INT    NOT NULL,
 	creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
 	last_update         DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,	
 	FOREIGN KEY (user_id) REFERENCES user_detail(id),
-	FOREIGN KEY (gid) REFERENCES group_info(gid),
-	PRIMARY KEY (gid,user_id)
+	FOREIGN KEY (id) REFERENCES group_info(id),
+	PRIMARY KEY (id,user_id)
+
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS user_access_entry (
     resource_id      INT NOT NULL,
-    user_id          INT   NOT NULL,
-	permission_id   INT NOT NULL,/*Access on file like read,write,all,etc.*/
-	FOREIGN KEY (user_id) REFERENCES user_detail(id),
+    id          INT   NOT NULL,
+	pid   INT NOT NULL,/*Access on file like read,write,all,etc.*/
+	FOREIGN KEY (id) REFERENCES user_detail(id),
 	FOREIGN KEY (resource_id) REFERENCES resource_info(id),
-	FOREIGN KEY (permission_id) REFERENCES permission_bit(permission_id),
-	PRIMARY KEY (resource_id,user_id)
+	FOREIGN KEY (pid) REFERENCES permission_bit(id),
+	PRIMARY KEY (resource_id,id)
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS group_access_entry (
     resource_id      INT NOT NULL,
-    gid          INT   NOT NULL,
-	permission_id   INT NOT NULL,/*Access on file like read,write,all,etc.*/
-	FOREIGN KEY (gid) REFERENCES group_info(gid),
+    id          INT   NOT NULL,/*Group Id*/
+	pid   INT NOT NULL,/*Access on file like read,write,all,etc.*/
+	FOREIGN KEY (id) REFERENCES group_info(id),
 	FOREIGN KEY (resource_id) REFERENCES resource_info(id),
-	FOREIGN KEY (permission_id) REFERENCES permission_bit(permission_id),
-	PRIMARY KEY (resource_id,gid)
+	FOREIGN KEY (pid) REFERENCES permission_bit(id),
+	PRIMARY KEY (resource_id,id)
 )ENGINE = INNODB CHARACTER SET=utf8;
