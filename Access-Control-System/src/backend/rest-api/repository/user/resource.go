@@ -20,6 +20,8 @@ func NewResourceRepository(conn *sql.DB) *resourceRepository {
 func (resource *resourceRepository) GetByID(cntx context.Context, id int64) (interface{}, error) {
 	obj := new(model.Resource)
 	/*lines to get resource content from server*/
+	os.Open(usr.ResourcePath+"/"+usr.ResourceName)
+	os.Close()
 	return driver.GetById(resource.conn, obj, id)
 }
 
@@ -27,6 +29,7 @@ func (resource *resourceRepository) Create(cntx context.Context, obj interface{}
 	usr := obj.(model.Resource)
 	/*lines to create resource on server*/
 	os.Create(usr.ResourcePath+"/"+usr.ResourceName)
+	os.Close()
 	result, err := driver.Create(resource.conn, &usr)
 	if nil != err {
 		return 0, err
