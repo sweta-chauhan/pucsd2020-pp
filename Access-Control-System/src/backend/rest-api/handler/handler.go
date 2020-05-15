@@ -27,6 +27,7 @@ type response struct {
 	Status  int         `json:"status,omitempty"`
 	Data    interface{} `json:"data,omitempty"`
 	Message string      `json:"message,omitempty"`
+
 }
 
 func (hdlr *HTTPHandler) GetHTTPHandler() []HTTPHandler {
