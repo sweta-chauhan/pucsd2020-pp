@@ -2,9 +2,9 @@
 
 ## Cloning repository
 
-L820:~ tushar$cd ~/workspace/src/github.com/  
+cd ~/workspace/src/github.com/  
 
-L820:~ tushar$git clone https://github.com/patharetush/pucsd2020-pp.git 
+git clone https://github.com/sweta-chauhan/pucsd2020-pp.git 
 
 ## Configuration details 
 
@@ -20,17 +20,76 @@ cp resource/config/configuration.cfg /etc/myproject/configuration.cfg
 
 ## HOW TO COMPILE
 
-L820:~ tushar$cd ~/workspace/src/github.com/pucsd2020-pp/rest-api  
+	*	cd ~/workspace/src/github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api  
 
-L820:rest-api tushar$ go build
+	*   go build
 
 ## HOW TO RUN
-L820:rest-api tushar$ ./rest-api
+	*  ./rest-api
+	*	go run main.go
 
 ## SENDING HTTP REQUEST
 Install curl if not already installed.  
 
 command : apt install curl
 
-L820:~ tushar$ curl http://localhost:8080/Golang
-Hi there, I love Golang!
+API format
+	* GET
+		*	To create
+			Data is to be provided for all the following API calls.
+			1	User 
+					```http://localhost:9090/webapi/v1/user```
+			2	Group
+					```http://localhost:9090/webapi/v1/group```
+			3	GroupUser
+					```http://localhost:9090/webapi/v1/groupuser```
+			4	Resource
+				```http://localhost:9090/webapi/v1/resource```
+			5	ResourceType
+				```http://localhost:9090/webapi/v1/rtype```
+			6	GroupAccess
+				```http://localhost:9090/webapi/v1/groupaccess```
+			7	UserAccess
+				```http://localhost:9090/webapi/v1/useraccess```
+		* 	GetAll
+			1	User 
+					```http://localhost:9090/webapi/v1/user```
+			2	Group
+					```http://localhost:9090/webapi/v1/group```
+			3	GroupUser
+					```http://localhost:9090/webapi/v1/groupuser```
+			4	Resource
+				```http://localhost:9090/webapi/v1/resource```
+			5	ResourceType
+				```http://localhost:9090/webapi/v1/rtype```
+			6	GroupAccess
+				```http://localhost:9090/webapi/v1/groupaccess```
+			7	UserAccess
+				```http://localhost:9090/webapi/v1/useraccess```
+		* GetByAnyCol
+			1	User 	
+			2	Group
+			3	GroupUser
+				```http://localhost:9090/webapi/v1/users/1```
+			4	Resource
+			5	ResourceType
+			6	GroupAccess
+			7	UserAccess
+	* PUT 
+		*	Update
+			1	User 	
+			2	Group
+			3	GroupUser
+			4	Resource
+			5	ResourceType
+			6	GroupAccess
+			7	UserAccess
+	* POST
+		*	Delete
+			1	User 	
+			2	Group
+			3	GroupUser
+			4	Resource
+			5	ResourceType
+			6	GroupAccess
+			7	UserAccess
