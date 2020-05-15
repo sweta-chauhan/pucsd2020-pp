@@ -6,9 +6,9 @@ insert into user_detail (first_name,last_name,username,email,password,is_sudo_ac
 
 /*Permission table seeding*/
 
-insert into permission_bit (permission_id,p_read,p_write) values(1,1,1);/*Read,Write*/
-insert into permission_bit (permission_id,p_read,p_write) values(2,1,0);/*Read*/
-insert into permission_bit (permission_id,p_read,p_write) values(3,0,1);/*Write*/
+insert into permission_bit (id,p_read,p_write) values(1,1,1);/*Read,Write*/
+insert into permission_bit (id,p_read,p_write) values(2,1,0);/*Read*/
+insert into permission_bit (id,p_read,p_write) values(3,0,1);/*Write*/
 
 /*Resource type domain table seeding*/
 
@@ -23,11 +23,11 @@ insert into resource_info (resource_type_id,parent_resource_id,resource_name,loc
 
 /*Group User seeding*/
 
-insert into group_user (gid,user_id) values(1,1);
+insert into group_user (id,user_id) values(1,1);
 
 /*User access entry seeding*/
 
-insert into user_access_entry (resource_id,user_id,permission_id) values(1,1,1);
+insert into user_access_entry (resource_id,id,pid) values(1,1,1);
 
 /*Group access entry seeding*/
-insert into group_access_entry (resource_id,gid,permission_id) values(1,1,1);
+insert into group_access_entry (resource_id,id,pid) values(1,1,1);
