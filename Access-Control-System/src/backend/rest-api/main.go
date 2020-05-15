@@ -27,6 +27,15 @@ func init() {
 		log.Printf("Error while creating db connectiion:%s", err.Error())
 		os.Exit(1)
 	}
+	_, err1 := os.Stat(config.Config().Storage)
+ 
+	if os.IsNotExist(err1) {
+		errDir := os.MkdirAll(config.Config().Storage, 0755)
+		if errDir != nil {
+			log.Fatal(err)
+		}
+ 
+	}
 	handlers = []handler.IHTTPHandler{
 				httpHandler.NewUserHandler(dbConn),
 				httpHandler.NewGroupHandler(dbConn),
