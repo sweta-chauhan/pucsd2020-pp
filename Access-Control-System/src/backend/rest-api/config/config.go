@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	configFile = "/etc/myproject/rest-api.cfg"
+	configFile = "/etc/myproject/configuration.cfg"
 )
 
 var (
