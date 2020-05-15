@@ -32,6 +32,10 @@ func init() {
 				httpHandler.NewGroupHandler(dbConn),
 				httpHandler.NewResourceHandler(dbConn),
 				httpHandler.NewGroupUserHandler(dbConn),
+				httpHandler.NewGroupAccessEntryHandler(dbConn),
+				httpHandler.NewUserAccessEntryHandler(dbConn),
+				httpHandler.NewPermissionHandler(dbConn),
+				httpHandler.NewResourceTypeHandler(dbConn),
 	}
 }
 
@@ -51,7 +55,6 @@ func createRouterGroup(router *chi.Mux) {
 					r.Delete(path, hlr.Func)
 				case http.MethodPatch:
 					r.Patch(path, hlr.Func)
-
 				default:
 					log.Println("Invalid method")
 				}
