@@ -20,6 +20,7 @@ type RestApiConfig struct {
 	Host     string          `json:"host"`
 	Port     int             `json:"port"`
 	Database MysqlConnection `json:"database"`
+	Storage	 string          `json:"server_storage"`  
 }
 
 type MysqlConnection struct {
