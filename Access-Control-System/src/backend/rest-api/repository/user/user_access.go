@@ -39,9 +39,9 @@ func (useraccess *useraccessRepository) Update(cntx context.Context, obj interfa
 	return obj, err
 }
 
-func (useraccess *useraccessRepository) Delete(cntx context.Context, id int64) error {
+func (useraccess *useraccessRepository) Delete(cntx context.Context, id int64) (interface{}, error) {
 	obj := &model.UserAccessEntry{Id: id}
-	return driver.SoftDeleteById(useraccess.conn, obj, id)
+	return driver.DeleteById(useraccess.conn, obj, id)
 }
 
 func (useraccess *useraccessRepository) GetAll(cntx context.Context) ([]interface{}, error) {
@@ -49,3 +49,9 @@ func (useraccess *useraccessRepository) GetAll(cntx context.Context) ([]interfac
 	return driver.GetAll(useraccess.conn, obj, 0, 0)
 }
 
+
+
+func (useraccess *useraccessRepository) GetByAnyCol(cntx context.Context, colname string, value interface{}) ([]interface{}, error) {
+	obj := &model.UserAccessEntry{}
+	return driver.GetByAnyCol(useraccess.conn, obj, colname, value)
+}

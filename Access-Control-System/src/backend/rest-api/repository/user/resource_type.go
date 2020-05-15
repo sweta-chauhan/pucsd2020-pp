@@ -39,9 +39,9 @@ func (rtype *rtypeRepository) Update(cntx context.Context, obj interface{}) (int
 	return obj, err
 }
 
-func (rtype *rtypeRepository) Delete(cntx context.Context, id int64) error {
+func (rtype *rtypeRepository) Delete(cntx context.Context, id int64) (interface{}, error){
 	obj := &model.ResourceType{Id: id}
-	return driver.SoftDeleteById(rtype.conn, obj, id)
+	return driver.DeleteById(rtype.conn, obj, id)
 }
 
 func (rtype *rtypeRepository) GetAll(cntx context.Context) ([]interface{}, error) {
@@ -49,3 +49,7 @@ func (rtype *rtypeRepository) GetAll(cntx context.Context) ([]interface{}, error
 	return driver.GetAll(rtype.conn, obj, 0, 0)
 }
 
+func (rtype *rtypeRepository) GetByAnyCol(cntx context.Context, colname string, value interface{}) ([]interface{}, error) {
+	obj := &model.ResourceType{}
+	return driver.GetByAnyCol(rtype.conn, obj, colname, value)
+}

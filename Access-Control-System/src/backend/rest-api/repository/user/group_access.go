@@ -39,12 +39,17 @@ func (groupaccess *groupaccessRepository) Update(cntx context.Context, obj inter
 	return obj, err
 }
 
-func (groupaccess *groupaccessRepository) Delete(cntx context.Context, id int64) error {
+func (groupaccess *groupaccessRepository) Delete(cntx context.Context, id int64) (interface{}, error) {
 	obj := &model.GroupAccessEntry{Id: id}
-	return driver.SoftDeleteById(groupaccess.conn, obj, id)
+	return driver.DeleteById(groupaccess.conn, obj, id)
 }
 
 func (groupaccess *groupaccessRepository) GetAll(cntx context.Context) ([]interface{}, error) {
 	obj := &model.GroupAccessEntry{}
 	return driver.GetAll(groupaccess.conn, obj, 0, 0)
+}
+
+func (groupaccess *groupaccessRepository) GetByAnyCol(cntx context.Context, colname string, value interface{}) ([]interface{}, error) {
+	obj := &model.GroupAccessEntry{}
+	return driver.GetByAnyCol(groupaccess.conn, obj, colname, value)
 }

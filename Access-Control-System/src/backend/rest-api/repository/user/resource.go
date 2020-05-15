@@ -2,8 +2,9 @@ package user
 
 import (		
 	"os"
-	//"fmt"
+	"path/filepath"
 	"context"
+	//"fmt"
 	"database/sql"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/driver"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/model"
@@ -19,17 +20,32 @@ func NewResourceRepository(conn *sql.DB) *resourceRepository {
 
 func (resource *resourceRepository) GetByID(cntx context.Context, id int64) (interface{}, error) {
 	obj := new(model.Resource)
-	/*lines to get resource content from server*/
-	os.Open(usr.ResourcePath+"/"+usr.ResourceName)
-	os.Close()
 	return driver.GetById(resource.conn, obj, id)
 }
 
 func (resource *resourceRepository) Create(cntx context.Context, obj interface{}) (interface{}, error) {
 	usr := obj.(model.Resource)
 	/*lines to create resource on server*/
-	os.Create(usr.ResourcePath+"/"+usr.ResourceName)
-	os.Close()
+	if usr.ResourceType == 1 {
+	basepath := usr.ResourcePath
+	filename := usr.ResourceName 
+	dst,_ := os.Create(filepath.Join(basepath, filename, "/"))
+	defer dst.Close()
+	}
+	if usr.ResourceType == 2 {
+		basepath := usr.ResourcePath
+		foldername := usr.ResourceName
+		_, err := os.Stat(filepath.Join(basepath, foldername, "/"))
+ 		
+	if os.IsNotExist(err) {
+		errDir := os.MkdirAll(usr.ResourcePath+"/"+usr.ResourceName, 0755)
+		if errDir != nil {
+			return 0, err
+		}
+	
+	}
+
+	}
 	result, err := driver.Create(resource.conn, &usr)
 	if nil != err {
 		return 0, err
@@ -42,15 +58,32 @@ func (resource *resourceRepository) Create(cntx context.Context, obj interface{}
 
 func (resource *resourceRepository) Update(cntx context.Context, obj interface{}) (interface{}, error) {
 	usr := obj.(model.Resource)
-	/*lines to add lines in resource on server*/
+	
 	err := driver.UpdateById(resource.conn, &usr)
 	return obj, err
 }
 
-func (resource *resourceRepository) Delete(cntx context.Context, id int64) error {
-	obj := &model.Resource{Id: id}
+func (resource *resourceRepository) Delete(cntx context.Context, id int64) (interface{}, error) {
+	usr := &model.Resource{Id: id}
 	/*Lines to delete file over the server*/
-	return driver.SoftDeleteById(resource.conn, obj, id)
+	obj := new(model.Resource)
+	driver.GetById(resource.conn, obj, id)
+	if obj.ResourceType == 1 {
+	basepath := obj.ResourcePath
+	filename := obj.ResourceName 
+	os.Remove(filepath.Join(basepath, filename, "/"))
+	}
+
+	if obj.ResourceType == 2 {
+		basepath := obj.ResourcePath
+		foldername := obj.ResourceName
+		_, err := os.Stat(filepath.Join(basepath, foldername, "/"))
+	if os.IsNotExist(err)!= true{
+		os.Remove(filepath.Join(basepath, foldername, "/"))
+	}
+
+	}
+	return driver.DeleteById(resource.conn, usr, id)
 }
 
 func (resource *resourceRepository) GetAll(cntx context.Context) ([]interface{}, error) {
@@ -58,3 +91,8 @@ func (resource *resourceRepository) GetAll(cntx context.Context) ([]interface{},
 	return driver.GetAll(resource.conn, obj, 0, 0)
 }
 
+
+func (resource *resourceRepository) GetByAnyCol(cntx context.Context, colname string, value interface{}) ([]interface{}, error) {
+	obj := &model.Resource{}
+	return driver.GetByAnyCol(resource.conn, obj, colname, value)
+}

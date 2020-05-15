@@ -39,9 +39,9 @@ func (user *userRepository) Update(cntx context.Context, obj interface{}) (inter
 	return obj, err
 }
 
-func (user *userRepository) Delete(cntx context.Context, id int64) error {
+func (user *userRepository) Delete(cntx context.Context, id int64) (interface{}, error) {
 	obj := &model.User{Id: id}
-	return driver.SoftDeleteById(user.conn, obj, id)
+	return driver.DeleteById(user.conn, obj, id)
 }
 
 func (user *userRepository) GetAll(cntx context.Context) ([]interface{}, error) {
@@ -49,3 +49,7 @@ func (user *userRepository) GetAll(cntx context.Context) ([]interface{}, error) 
 	return driver.GetAll(user.conn, obj, 0, 0)
 }
 
+func (user *userRepository) GetByAnyCol(cntx context.Context, colname string, value interface{}) ([]interface{}, error) {
+	obj := &model.User{}
+	return driver.GetByAnyCol(user.conn, obj, colname, value)
+}

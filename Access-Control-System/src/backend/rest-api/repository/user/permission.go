@@ -39,9 +39,9 @@ func (permission *permissionRepository) Update(cntx context.Context, obj interfa
 	return obj, err
 }
 
-func (permission *permissionRepository) Delete(cntx context.Context, id int64) error {
+func (permission *permissionRepository) Delete(cntx context.Context, id int64) (interface{}, error) {
 	obj := &model.Permission{Id: id}
-	return driver.SoftDeleteById(permission.conn, obj, id)
+	return driver.DeleteById(permission.conn, obj, id)
 }
 
 func (permission *permissionRepository) GetAll(cntx context.Context) ([]interface{}, error) {
@@ -49,3 +49,7 @@ func (permission *permissionRepository) GetAll(cntx context.Context) ([]interfac
 	return driver.GetAll(permission.conn, obj, 0, 0)
 }
 
+func (permission *permissionRepository) GetByAnyCol(cntx context.Context, colname string, value interface{}) ([]interface{}, error) {
+	obj := &model.Permission{}
+	return driver.GetByAnyCol(permission.conn, obj, colname, value)
+}

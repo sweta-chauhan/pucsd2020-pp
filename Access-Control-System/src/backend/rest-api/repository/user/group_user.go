@@ -2,6 +2,7 @@ package user
 
 import (		
 	"context"
+	"fmt"
 	"database/sql"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/driver"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/model"
@@ -39,13 +40,19 @@ func (groupuser *groupuserRepository) Update(cntx context.Context, obj interface
 	return obj, err
 }
 
-func (groupuser *groupuserRepository) Delete(cntx context.Context, id int64) error {
+func (groupuser *groupuserRepository) Delete(cntx context.Context, id int64) (interface{}, error) {
 	obj := &model.GroupUser{Id: id}
-	return driver.SoftDeleteById(groupuser.conn, obj, id)
+	return driver.DeleteById(groupuser.conn, obj, id)
 }
 
 func (groupuser *groupuserRepository) GetAll(cntx context.Context) ([]interface{}, error) {
 	obj := &model.GroupUser{}
 	return driver.GetAll(groupuser.conn, obj, 0, 0)
 }
+
+func (groupuser *groupuserRepository) GetByAnyCol(cntx context.Context, colname string, value interface{}) ([]interface{}, error) {
+	obj := &model.GroupUser{}
+	fmt.Println("Hello....")
+	return driver.GetByAnyCol(groupuser.conn, obj, colname, value)
+} 
 
