@@ -91,7 +91,7 @@ func (groupaccess *GroupAccessEntry) Delete(w http.ResponseWriter, r *http.Reque
 		if nil != err {
 			break
 		}
-		err = groupaccess.repo.Delete(r.Context(), id)
+		_, err = groupaccess.repo.Delete(r.Context(), id)
 		if nil != err {
 			break
 		}

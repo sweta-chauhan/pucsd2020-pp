@@ -91,7 +91,7 @@ func (useraccess *UserAccessEntry) Delete(w http.ResponseWriter, r *http.Request
 		if nil != err {
 			break
 		}
-		err = useraccess.repo.Delete(r.Context(), id)
+		_, err = useraccess.repo.Delete(r.Context(), id)
 		if nil != err {
 			break
 		}

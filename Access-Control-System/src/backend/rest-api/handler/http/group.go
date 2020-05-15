@@ -91,7 +91,7 @@ func (group *Group) Delete(w http.ResponseWriter, r *http.Request) {
 		if nil != err {
 			break
 		}
-		err = group.repo.Delete(r.Context(), id)
+		_, err = group.repo.Delete(r.Context(), id)
 		if nil != err {
 			break
 		}

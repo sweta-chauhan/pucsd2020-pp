@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"net/http"
+	"fmt"
 	"strconv"
 	"github.com/go-chi/chi"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/handler"
@@ -66,6 +67,9 @@ func (resource *Resource) Update(w http.ResponseWriter, r *http.Request) {
 	id,_ := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	grp := model.Resource{}
 	err := json.NewDecoder(r.Body).Decode(&grp)
+	var grp_info interface{}
+	grp_info, err = resource.repo.GetByID(r.Context(), id)
+	fmt.Println(grp_info)
 	for {
 		if nil != err {
 			break
@@ -91,7 +95,7 @@ func (resource *Resource) Delete(w http.ResponseWriter, r *http.Request) {
 		if nil != err {
 			break
 		}
-		err = resource.repo.Delete(r.Context(), id)
+		_, err = resource.repo.Delete(r.Context(), id)
 		if nil != err {
 			break
 		}

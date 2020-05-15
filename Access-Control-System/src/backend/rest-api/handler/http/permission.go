@@ -91,7 +91,7 @@ func (permission *Permission) Delete(w http.ResponseWriter, r *http.Request) {
 		if nil != err {
 			break
 		}
-		err = permission.repo.Delete(r.Context(), id)
+		_, err = permission.repo.Delete(r.Context(), id)
 		if nil != err {
 			break
 		}

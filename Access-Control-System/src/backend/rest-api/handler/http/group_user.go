@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+	//"fmt"
 	"github.com/go-chi/chi"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/handler"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/model"
@@ -27,11 +28,12 @@ func NewGroupUserHandler(conn *sql.DB) *GroupUser {
 func (groupuser *GroupUser) GetHTTPHandler() []*handler.HTTPHandler {
 	return []*handler.HTTPHandler{
 		&handler.HTTPHandler{Authenticated: false, Method: http.MethodGet, Path: "groupuser/{id}", Func: groupuser.GetByID},
+		&handler.HTTPHandler{Authenticated: false, Method: http.MethodGet, Path: "groups/{uid}", Func: groupuser.GetByAnyCol},
 		&handler.HTTPHandler{Authenticated: false, Method: http.MethodPost, Path: "groupuser", Func: groupuser.Create},
-		&handler.HTTPHandler{Authenticated: false, Method: http.MethodPut, Path: "groupuser/{id}", Func: groupuser.Update},
 		&handler.HTTPHandler{Authenticated: false, Method: http.MethodDelete, Path: "groupuser/{id}", Func: groupuser.Delete},
 		&handler.HTTPHandler{Authenticated: false, Method: http.MethodGet, Path: "groupuser", Func: groupuser.GetAll},
 		&handler.HTTPHandler{Authenticated: false, Method: http.MethodPatch, Path: "groupuser/{id}", Func: groupuser.Update},
+		
 	}
 }
 func (groupuser *GroupUser) GetByID(w http.ResponseWriter, r *http.Request) {
@@ -48,6 +50,19 @@ func (groupuser *GroupUser) GetByID(w http.ResponseWriter, r *http.Request) {
 	handler.WriteJSONResponse(w, r, grp, http.StatusOK, err)
 }
 
+func (groupuser *GroupUser) GetByAnyCol(w http.ResponseWriter, r *http.Request) {
+	var grp interface{}
+	id, err := strconv.ParseInt(chi.URLParam(r, "uid"), 10, 64)
+	for {
+		if nil != err {
+			break
+		}
+		grp, err = groupuser.repo.GetByAnyCol(r.Context(),"user_id",id)
+		
+		break
+	}
+	handler.WriteJSONResponse(w, r, grp, http.StatusOK, err)
+}
 func (groupuser *GroupUser) Create(w http.ResponseWriter, r *http.Request) {
 	var grp model.GroupUser	
 	err := json.NewDecoder(r.Body).Decode(&grp)
@@ -91,7 +106,7 @@ func (groupuser *GroupUser) Delete(w http.ResponseWriter, r *http.Request) {
 		if nil != err {
 			break
 		}
-		err = groupuser.repo.Delete(r.Context(), id)
+		_, err = groupuser.repo.Delete(r.Context(), id)
 		if nil != err {
 			break
 		}
