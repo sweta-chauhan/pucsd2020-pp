@@ -20,12 +20,13 @@ export class SearchComponent implements OnInit {
 		this._api.getById(1)
 		.subscribe((res) => 
 				{
-					console.log(res);
+					//console.log(res);
 					this.user = res.data;
-					console.log(this.user);
+					//console.log(this.user);
 				});
   }
-onClick() {
-    this._api.getById(1)
+onClick(id?:number) {
+    console.log(id)
+    this._api.getById(id)
     }
 }

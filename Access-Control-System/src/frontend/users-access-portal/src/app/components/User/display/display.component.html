@@ -2,44 +2,55 @@
 #users {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  text-align:center;
+  margin-top:10px; 
+  margin-bottom:auto;
+  margin-left:auto; 
+  margin-right:auto; 
+  width:100px;
 }
 
 #users td, #users th {
   border: 1px solid #ddd;
   padding: 8px;
 }
+#users tr:nth-child(odd){background-color: #ddd;}
+#users tr:nth-child(even){background-color: white;}
 
-#users tr:nth-child(even){background-color: #f2f2f2;}
-
-#users tr:hover {background-color: #ddd;}
+#users tr:hover {background-color: lightblue;}
 
 #users th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
-  background-color: gray;
+  text-align: center;
+  background-color: blue;
   color: white;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 </style>
+
+<div style="background-image: url('../../../assets/image/background.jpg');">
+
 <table id="users">
 	<tr>
+		<th>Profile</th>
 		<th>Id</th>
-		<th>First NAme</th>
+		<th>First Name</th>
 		<th>Last Name</th>
 		<th>Email</th>
-		<th>Password</th>
+		<!--<th>Password</th>-->
 		<th>Contact Number</th>
-		<th>Updated By</th>
+		<!--<th>Updated By</th>-->
 	</tr>
 	<tr *ngFor="let usr of users ">
+		<td><img src="../../../assets/image/profile.png"></td>
 		<td>{{usr?.id}}</td>
 		<td>{{usr?.first_name}}</td>
 		<td>{{usr?.last_name}}</td>
 		<td>{{usr?.email}}</td>
-		<td>{{usr?.password}}</td>
+		<!--<td>{{usr?.password}}</td>-->
 		<td>{{usr?.contact_number}}</td>
-		<td>{{usr?.updated_by}}</td>
+		<!--<td>{{usr?.updated_by}}</td>-->
 	</tr>
-
 </table>
+</div>

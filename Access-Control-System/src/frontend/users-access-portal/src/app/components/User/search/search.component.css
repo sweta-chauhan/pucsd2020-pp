@@ -1,0 +1,25 @@
+form{
+  text-align: center
+} 
+input[type=text] {
+  
+  width: 30%;
+  font-size:14px;
+  padding: 10px 15px;
+  margin-top:20px;
+  margin-bottom:auto;
+  margin-left:auto; 
+  margin-right:auto;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid red;
+
+}
+  
+  img{
+        max-width: 50%;
+        max-height: 50%;
+        display: block; /* remove extra space below image */
+    }
+
+  tr,td, {text-align:center;}
