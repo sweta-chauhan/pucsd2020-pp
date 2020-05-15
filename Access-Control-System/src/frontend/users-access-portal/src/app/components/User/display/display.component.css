@@ -1,4 +1,12 @@
-th, td {
-  padding: 15px;
-  text-align: left;
-}
+ div.container {
+    width:98%; 
+    margin:1%;
+  }
+  
+  img{
+        max-width: 50%;
+        max-height: 50%;
+        display: block; /* remove extra space below image */
+    }
+
+  tr,td, {text-align:center;}

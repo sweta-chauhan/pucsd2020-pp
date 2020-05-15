@@ -23,52 +23,33 @@
 }
 </style>
 
-<style> 
-input[type=text] {
-  width: 130px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  background-image: url('searchicon.png');
-  background-position: 10px 10px; 
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
-}
-
-input[type=text] {
-  width: 100%;
-}
-</style>
-
-
 
 <form>
-  <input type="text" name="search" placeholder="Search User By Id...">
+  <input type="text" name="search" id="search" placeholder="Search User By Id..." >
+  <input type="submit">
 </form>
 
 
 <table id="user">
-	<tr>
-		<th>Id</th>
-		<th>First NAme</th>
-		<th>Last Name</th>
-		<th>Email</th>
-		<th>Password</th>
-		<th>Contact Number</th>
-		<th>Updated By</th>
-	</tr>
-	<tr >
-		<td>{{user?.id}}</td>
-		<td>{{user?.first_name}}</td>
-		<td>{{user?.last_name}}</td>
-		<td>{{user?.email}}</td>
-		<td>{{user?.password}}</td>
-		<td>{{user?.contact_number}}</td>
-		<td>{{user?.updated_by}}</td>
-	</tr>
-
+  <tr>
+    <th>Profile</th>
+    <th>Id</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <!--<th>Password</th>-->
+    <th>Contact Number</th>
+    <!--<th>Updated By</th>-->
+  </tr>
+  <tr>
+    <td><img src="../../../assets/image/profile.png"></td>
+    <td>{{user?.id}}</td>
+    <td>{{user?.first_name}}</td>
+    <td>{{user?.last_name}}</td>
+    <td>{{user?.email}}</td>
+    <!--<td>{{usr?.password}}</td>-->
+    <td>{{user?.contact_number}}</td>
+    <!--<td>{{usr?.updated_by}}</td>-->
+  </tr>
 </table>
+
