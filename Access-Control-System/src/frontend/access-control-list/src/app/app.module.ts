@@ -17,6 +17,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTabsModule} from '@angular/material/tabs';
+
+
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 import { LoginComponent } from './component/login/login.component';
@@ -24,6 +29,12 @@ import { UserportalComponent } from './component/userportal/userportal.component
 import { FooterComponent } from './component/footer/footer.component';
 import { AboutComponent } from './component/about/about.component';
 import { MainComponent } from './component/main/main.component';
+import { ApiService } from './services/api.service';
+import { RegisterUserComponent } from './component/register-user/register-user.component';
+import { PermissionResourseComponent } from './component/permission-resourse/permission-resourse.component';
+import { GroupComponent } from './component/group/group.component';
+import { MemberGroupComponent } from './component/member-group/member-group.component';
+import { ResourceComponent } from './component/resource/resource.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +43,12 @@ import { MainComponent } from './component/main/main.component';
     UserportalComponent,
     FooterComponent,
     AboutComponent,
-    MainComponent
+    MainComponent,
+    RegisterUserComponent,
+    PermissionResourseComponent,
+    GroupComponent,
+    MemberGroupComponent,
+    ResourceComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +64,10 @@ import { MainComponent } from './component/main/main.component';
     MatTableModule,
     MatMenuModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    HttpClientModule,
+    MatRadioModule,
+   MatTabsModule
   ],
   providers: [
     MatToolbarModule, 
@@ -59,7 +78,8 @@ import { MainComponent } from './component/main/main.component';
    MatTableModule, 
    MatMenuModule,
    MatIconModule,
-   MatProgressSpinnerModule
+   MatProgressSpinnerModule,
+   
   ],
   bootstrap: [AppComponent]
 })
