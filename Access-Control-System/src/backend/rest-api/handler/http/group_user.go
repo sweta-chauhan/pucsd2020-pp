@@ -43,8 +43,8 @@ func (groupuser *GroupUser) GetByID(w http.ResponseWriter, r *http.Request) {
 		if nil != err {
 			break
 		}
+		grp, err = groupuser.repo.GetByAnyCol(r.Context(),"id",id)
 		
-		grp, err = groupuser.repo.GetByID(r.Context(), id)
 		break
 	}
 	handler.WriteJSONResponse(w, r, grp, http.StatusOK, err)
