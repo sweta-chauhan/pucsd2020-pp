@@ -10,6 +10,12 @@ import { Useraccess } from '../models/useraccess';
 import { Resourcetype }	from '../models/resourcetype';
 
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+})
+};
+
 import { Observable, throwError } from 'rxjs';
 
 @Injectable({
@@ -19,16 +25,17 @@ export class ApiService {
 
 
   constructor(private httpclient: HttpClient) { }
-	
+	 
 	  
   private BASE_URL = "http://localhost:9090/webapi/v1"  
   /*Create User Object*/
+  
   createUser(body:any|null):Observable<User>{
    return this.httpclient.post<User>(this.BASE_URL,body);
     }
 
   /*Get Object by id*/
-    getUserById(id: number):Observable<User>{
+  getUserById(id: number):Observable<User>{
 	 return this.httpclient.get<User>(this.BASE_URL+"/user/"+id);
 	  }
 
