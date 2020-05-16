@@ -2,7 +2,7 @@ USE Access_Control_List;
 
 /*Root user initilization*/
 
-insert into user_detail (first_name,last_name,username,email,password,is_sudo_access) values('ACL','CONTROL','root','acl.control@acl.sn','2cb134080590a03859205d29fadfe29ddde215418d00839cef84ba9e13c945de',1);
+insert into user_detail (first_name,last_name,username,email,password,is_sudo_access) values('ACL','CONTROL','root','acl.control@acl.sn','hello@123',1);
 
 /*Permission table seeding*/
 
