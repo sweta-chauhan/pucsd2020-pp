@@ -1,4 +1,4 @@
 export class Groupuser {
-    id		  int;
-    user_id   int;
+    group_id:number;
+    user_id:number;
 }
