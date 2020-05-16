@@ -1,38 +1,19 @@
+<app-header></app-header>
 <div class="login-page">
     <mat-card class="mat-elevation-z12">
-        <mat-card-title style="text-align:center;">Group Form</mat-card-title>
         <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
-            <mat-tab label="Sign In">
+            <mat-tab label="Group Info">
                 <mat-card-content>
-                    <form action="">
-
-
+                    <form>
                         <mat-form-field>
-                            <input matInput placeholder="Group name" required name="GroupName" ngModel #email="ngModel">
-
-                            <mat-icon matSuffix>Group Name</mat-icon>
+                            <input matInput placeholder="Group Name" [(ngModel)]="groupname" name="groupname" required>
                         </mat-form-field>
-
-
-
-
-                        <a routerLink="/registration"> <button mat-raised-button color="primary" class="login-button">
+                         <button mat-raised-button color="primary" class="login-button" (click)="creategroup()">
                 Create
-                
-
-              </button></a>
-
-
-                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
-                Delete
-                
-
-              </button></a>
-                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
+              </button> 
+              <button mat-raised-button color="warn" class="login-button" (click)="cancel()">
                 Cancel
-                
-
-              </button></a>
+              </button>
                     </form>
                 </mat-card-content>
             </mat-tab>

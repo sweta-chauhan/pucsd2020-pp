@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service';
+
 
 @Component({
   selector: 'app-group',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./group.component.css']
 })
 export class GroupComponent implements OnInit {
-
-  constructor() { }
+  groupname:string;
+  group;
+  constructor(private _api: ApiService) { }
 
   ngOnInit(): void {
   }
-
+  creategroup(){
+  		this._api.createGroup({'gname':this.groupname})
+    .subscribe((res) => 
+        {
+        	this.group = res['data'];
+        });
+  }
+  cancel(){
+  	this.groupname=""
+  }
 }

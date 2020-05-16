@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="login-page">
     <mat-card class="mat-elevation-z12">
         <mat-card-title style="text-align:center;">Resouce To Access</mat-card-title>
@@ -8,34 +9,22 @@
 
 
                         <mat-form-field>
-                            <input matInput placeholder="Group Id" required name="GroupId" ngModel #email="ngModel">
+                            <input matInput placeholder="Group Id" [(ngModel)]="groupid" name="groupid" required>
 
                             <mat-icon matSuffix>Group </mat-icon>
                         </mat-form-field>
                         <mat-form-field>
-                            <input matInput placeholder="User Id" required name="UserId" ngModel #email="ngModel">
+                            <input matInput placeholder="User Id" [(ngModel)]="userid" name="userid" required>
 
                             <mat-icon matSuffix>User </mat-icon>
                         </mat-form-field>
                         <mat-form-field>
-                            <input matInput placeholder="Password" type="password" required minlength="6" name="password" ngModel #password="ngModel">
-                            <mat-error *ngIf="password.errors && password.errors.required">
-                                Password is required
-                            </mat-error>
-                            <mat-error *ngIf="password.errors && password.errors.minlength">
-                                Password must be of length 6
-                            </mat-error>
+                            <input matInput placeholder="access" [(ngModel)]="access" name="access">
                             <mat-icon matSuffix>lock</mat-icon>
                         </mat-form-field>
-
-
-
                         <a routerLink="/registration"> <button mat-raised-button color="primary" class="login-button">
                 Give Access
-                
-
               </button></a>
-
 
                         <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
                 Deletion

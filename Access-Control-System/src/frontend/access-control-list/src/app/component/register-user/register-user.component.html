@@ -1,45 +1,33 @@
+<app-header></app-header>
 <div class="login-page">
     <mat-card class="mat-elevation-z12">
-        <mat-card-title style="text-align:center;">User Form</mat-card-title>
         <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
-            <mat-tab label="Sign In">
+            <mat-tab label="User Details">
                 <mat-card-content>
                     <form action="">
                         <mat-form-field>
-                            <input matInput placeholder="FirstName" required name="FirstName" ngModel #email="ngModel">
+                            <input matInput placeholder="First name" [(ngModel)]="firstname" name="firstname" required>
 
                             <mat-icon matSuffix>FirstName</mat-icon>
                         </mat-form-field>
                         <mat-form-field>
-                            <input matInput placeholder="LastName" required name="LastName" ngModel #email="ngModel">
+                            <input matInput placeholder="LastName" [(ngModel)]="lastname" name="lastname" required>
 
                             <mat-icon matSuffix>LastName</mat-icon>
                         </mat-form-field>
                         <mat-form-field>
-                            <input matInput placeholder="UserName" required name="UserName" ngModel #email="ngModel">
-                            <mat-error *ngIf="email.invalid">Email is required</mat-error>
+                            <input matInput placeholder="Email" [(ngModel)]="email" name="email"required>
+                            
                             <mat-icon matSuffix>email</mat-icon>
                         </mat-form-field>
-
                         <mat-form-field>
-                            <input matInput placeholder="Password" type="password" required minlength="6" name="password" ngModel #password="ngModel">
-                            <mat-error *ngIf="password.errors && password.errors.required">
-                                Password is required
-                            </mat-error>
-                            <mat-error *ngIf="password.errors && password.errors.minlength">
-                                Password must be of length 6
-                            </mat-error>
-
+                            <input matInput placeholder="User Name" [(ngModel)]="username" name="username"required>
+                            
                         </mat-form-field>
-                        <mat-form-field>
-                            <input matInput placeholder="Confirm Password" type="password" required minlength="6" name="password" ngModel #password="ngModel">
-                            <mat-error *ngIf="password.errors && password.errors.required">
-                                Password is required
-                            </mat-error>
-                            <mat-error *ngIf="password.errors && password.errors.minlength">
-                                Password must be of length 6
-                            </mat-error>
 
+                        <mat-form-field>
+                            <input matInput placeholder="Password" type="password"  minlength="6" [(ngModel)]="password" name="password" required >
+                            
                         </mat-form-field>
                         <mat-radio-group><br> Is Sudo:<br>
 
@@ -50,21 +38,21 @@
 
                         </mat-radio-group>
 
-                        <a routerLink="/registration"> <button mat-raised-button color="primary" class="login-button">
-                Log In
+                         <button mat-raised-button color="primary" class="login-button" (click)="create()">
+                Create
                 
 
-              </button></a>
+              </button>
 
 
-                        <button mat-raised-button class="login-button">
+                        <button mat-raised-button class="login-button" (click)="update()">
                 Update
               </button>
-                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
+                         <button mat-raised-button color="warn" class="login-button" (click)="cancel()">
                 Cancel
                 
 
-              </button></a>
+              </button>
                     </form>
                 </mat-card-content>
             </mat-tab>

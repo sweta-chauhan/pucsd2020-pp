@@ -1,15 +1,2 @@
-<mat-toolbar color="primary">
-<mat-toolbar-row>
-<span>Access Control Portal</span>
-<span class="example-fill-remaining-space"></span>
-<span class="align-center"></span>
-<span class="example-spacer"></span>
-<span>
-     <button mat-button *ngIf="!isAuthenticated" routerLink="/login"> Login </button>
-	<button mat-button *ngIf="isAuthenticated"> Logout </button>
-</span>
-
- </mat-toolbar-row>
-</mat-toolbar>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

@@ -16,12 +16,12 @@
                         </mat-radio-group>
 
                         <mat-form-field>
-                            <input matInput placeholder="Resource Location" required name="ResourceLocation" ngModel #email="ngModel">
+                            <input matInput placeholder="Resource Name"  [(ngModel)]="ResourceName" name="ResourceName" required>
 
                             <mat-icon matSuffix>Resource Location</mat-icon>
                         </mat-form-field>
                         <mat-form-field>
-                            <input matInput placeholder="Resource Path" required name="ResourcePath" ngModel #email="ngModel">
+                            <input matInput placeholder="Resource Path" [(ngModel)]="ResourcePath"  name="ResourcePath" required>
 
                             <mat-icon matSuffix>Resource Path</mat-icon>
                         </mat-form-field>

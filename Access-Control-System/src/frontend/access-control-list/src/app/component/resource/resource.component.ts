@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class ResourceComponent implements OnInit {
 
   constructor() { }
-
+  ResourceName:string;
+  ResourcePath:string;
   ngOnInit(): void {
   }
 

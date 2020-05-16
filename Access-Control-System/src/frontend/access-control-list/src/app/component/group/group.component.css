@@ -1,115 +1,37 @@
-   .box .inputBox input {
-       width: 100%;
-       padding: 10px 0;
-       font-size: 16px;
-       color: linear-gradient(90deg, 105, 9, 5);
-       margin-bottom: 30px;
-       border: none;
-       border-bottom: 1px solid #2196f3;
-       outline: none;
-       background: transparent;
-   }
-   
-   .abtn {
-       position: relative;
-       display: inline-block;
-       padding: 15px 30px;
-       color: #2196f3;
-       text-transform: uppercase;
-       letter-spacing: 4px;
-       text-decoration: none;
-       border-radius: 30px;
-       font-size: 24px;
-       overflow: hidden;
-       transition: 0.2s;
-   }
-   
-   .abtn:hover {
-       color: green;
-       background: red;
-       box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
-       transition-delay: 1s;
-   }
-   
-   .abtn span {
-       position: absolute;
-       display: block;
-   }
-   
-   .abtn span:nth-child(1) {
-       top: 0;
-       left: -100%;
-       width: 100%;
-       height: 2px;
-       background: linear-gradient(90deg, transparent, red);
-   }
-   
-   .abtn:hover span:nth-child(1) {
-       left: 100%;
-       transition: 1s;
-   }
-   
-   .abtn span:nth-child(3) {
-       bottom: 0;
-       right: -100%;
-       width: 100%;
-       height: 2px;
-       background: linear-gradient(270deg, transparent, #2196f3);
-   }
-   
-   .abtn:hover span:nth-child(3) {
-       right: 100%;
-       transition: 1s;
-       transition-delay: 0.5s;
-   }
-   
-   .abtn span:nth-child(2) {
-       top: -100%;
-       right: 0;
-       width: 2px;
-       height: 100%;
-       background: linear-gradient(180deg, transparent, #2196f3);
-   }
-   
-   .abtn:hover span:nth-child(2) {
-       top: 100%;
-       transition: 1s;
-       transition-delay: 0.25s;
-   }
-   
-   .abtn span:nth-child(4) {
-       bottom: -100%;
-       left: 0;
-       width: 2px;
-       height: 100%;
-       background: linear-gradient(360deg, transparent, #2196f3);
-   }
-   
-   .abtn:hover span:nth-child(4) {
-       bottom: 100%;
-       transition: 0.75s;
-       transition-delay: 0.75s;
-   }
-   
-   .box {
-       border: 2px solid #2196f3;
-       position: absolute;
-       top: 40%;
-       left: 30%;
-       transform: translate(-20%, -20%);
-       width: 800px;
-       color: blue;
-       padding: 40px;
-       border-radius: 30%;
-       overflow: hidden;
-       box-sizing: border-box;
-       box-shadow: 0 15px 25px rgba(1, 2, 4, 0.5);
-       background: rgba(238, 175, 3, 0.65);
-   }
-   
-   .box h2 {
-       margin: 0 0 30px;
-       padding: 0;
-       color: green;
-       text-align: center;
-   }
+.login-page {
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    display: block;
+    background-color: #303F9F;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+mat-card {
+    width: 30%;
+    margin: 10% auto;
+    border-radius: 8px;
+}
+
+mat-form-field,
+mat-checkbox {
+    width: 80%;
+    display: block;
+    margin: auto;
+}
+
+mat-card-content {
+    margin-top: 20px;
+}
+
+.login-button {
+    margin-top: 20px;
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+}

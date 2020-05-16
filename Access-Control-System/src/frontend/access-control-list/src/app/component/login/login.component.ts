@@ -2,8 +2,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog'
+
 import { User } from '../../models/user';
+
 import { BehaviorSubject } from 'rxjs';
+
 import { ApiService } from '../../services/api.service';
 
 
@@ -16,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,private _api: ApiService) { }
   username: number;
   password: string;
-  user;
+  user:User;
   ngOnInit() {
   }
   login() : void {
@@ -24,13 +27,18 @@ export class LoginComponent implements OnInit {
     .subscribe((res) => 
         {
           this.user = res['data'];
+          if (this.username == this.user.id && 
+              this.password   == this.user.password) {
+              localStorage.setItem('id',this.user['id'].toString())
+              localStorage.setItem('isAdmin',this.user['is_sudo'].toString())
+              localStorage.setItem('username',this.user['first_name'])
+              
+            this.router.navigate(["userportal"]);
+          }
+          else {
+                  alert("Invalid credentials");
+          }
         });
-    if(this.username == this.user['id'] && this.password == this.user.password){
-            
-     this.router.navigate(["userportal"]);
-    }else {
-      alert("Invalid credentials");
-    }
   }
 
   cancel() : void {

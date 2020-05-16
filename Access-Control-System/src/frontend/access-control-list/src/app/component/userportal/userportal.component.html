@@ -1,2 +1,43 @@
-<p>uesrportal works!</p>
+<app-header></app-header>
 
+<div class="login-page">
+    <mat-card class="mat-elevation-z12">
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+            <mat-tab label="">
+                <mat-card-content>
+                    <form action="">
+                    	<a [routerLink]="['/user']">
+                         <button mat-raised-button color="primary" class="lg" >User+</button>
+                     </a>
+                        <a [routerLink]="['/resource']">
+                        <button mat-raised-button color="primary" class="lg">Resource+
+                        </button>
+                    </a>
+                        <a [routerLink]="['/group']">
+                        <button mat-raised-button color="primary" class="lg">Group+
+                        </button>
+                    </a>
+                        <mat-card-content><br><br> Welcome {{username}}
+                        </mat-card-content>
+                         <button mat-raised-button color="primary" class="login-button">
+                Group Available</button>
+
+
+                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
+                UserAvailble
+
+              </button></a>
+                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
+                ResourceAvailble
+                
+
+              </button></a>
+                    </form>
+                </mat-card-content>
+            </mat-tab>
+
+
+        </mat-tab-group>
+
+    </mat-card>
+</div>
