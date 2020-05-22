@@ -1,0 +1,101 @@
+<!--
+<mat-card-header>
+  <mat-toolbar class="toolbar">
+    <mat-card-title>User Details</mat-card-title>
+    <span class="toolbar-spacer"></span>
+    <mat-icon (click)="onNoClick()">cancel</mat-icon>
+  </mat-toolbar>
+</mat-card-header>
+<mat-card-content>
+  <div class="login-page">
+    <form [formGroup]="fileForm" (submit)="onSubmit()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <!--<label>Group Id</label>
+            <input type="text" formControlName="id" class="form-control" readonly="isReadOnly">-->
+            <!--
+            <textarea formControlName="fileContent" class="form-control">{{fileContent}}</textarea>
+        	</div>
+          <div class="col-md-6">
+          <button type="submit" [disabled]="isInvalid()" class="btn btn-success">
+            <mat-icon>save</mat-icon>
+          </button>
+          </div>
+        </div>
+    </div>
+</form>
+</div>
+</mat-card-content>
+-->
+
+<mat-card-header>
+  <mat-toolbar class="toolbar">
+    <mat-card-title>File Editor</mat-card-title>
+    <span class="toolbar-spacer"></span>
+    <button >
+      <mat-icon (click)="onNoClick()">
+        cancel
+      </mat-icon>
+  </button>
+  </mat-toolbar>
+</mat-card-header>
+
+<mat-card-content>
+  <div class="login-page">
+    <form [formGroup]="fileForm" (submit)="onSubmit()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Resource Id</label>
+            <input type="text" formControlName="id" class="form-control" readonly="isReadOnly">
+          </div>
+          <div class="col-md-6">
+                    <label>
+                        Resource Type
+                    </label>
+                                <input type="text" formControlName="rtype" class="form-control" readonly="isReadOnly">
+                </div>
+            </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Parent Id</label>
+              <input type="text" formControlName="prnt_id" class="form-control" readonly="isReadOnly">
+            </div>
+          <div class="col-md-6">
+                    <label>
+                        File Name
+                    </label>
+                                <input type="text" formControlName="rname" class="form-control" readonly="isReadOnly">
+                </div>
+            </div>
+            <div class="row">
+          <div class="col-md-6">
+            <label>Owner</label>
+            <input type="text" formControlName="owner" class="form-control" readonly="isReadOnly">
+          </div>
+          <div class="col-md-6">
+                    <label>
+                        Path
+                    </label>
+                                <input type="text" formControlName="rpath" class="form-control" readonly="isReadOnly">
+                </div>
+          </div>
+            <div class="row">
+            <div class="col-md-6">
+                    <label>
+                        Data
+                    </label>
+                    <textarea formControlName="data" class="form-control">{{data}}</textarea>
+                               
+                </div>      
+          <div class="col-md-6">
+          <button type="submit" class="btn btn-success">
+            <mat-icon>save</mat-icon>
+          </button>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+</mat-card-content>

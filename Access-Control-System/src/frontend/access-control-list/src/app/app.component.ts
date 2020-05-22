@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'access-control-list';
+  //isDialogOpen = false;
   constructor() { }
   ngOnInit(): void {
 	}	

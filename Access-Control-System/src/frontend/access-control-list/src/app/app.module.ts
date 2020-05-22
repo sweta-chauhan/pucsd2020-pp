@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminauthGuard } from './guards/adminauth.guard';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from "./app-routing.module";
 
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -25,6 +26,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
+
 import { LoginComponent } from './component/login/login.component';
 import { UserportalComponent } from './component/userportal/userportal.component';
 import { FooterComponent } from './component/footer/footer.component';
@@ -37,6 +39,15 @@ import { GroupComponent } from './component/group/group.component';
 import { MemberGroupComponent } from './component/member-group/member-group.component';
 import { ResourceComponent } from './component/resource/resource.component';
 import { HeaderComponent } from './component/header/header.component';
+import { FileeditorComponent } from './component/fileeditor/fileeditor.component';
+import { UserDialogComponent } from './component/user-dialog/user-dialog.component';
+import { MemberDialrerComponent } from './component/member-dialrer/member-dialrer.component';
+import { FileEditorComponent } from './component/file-editor/file-editor.component';
+import { GroupDialogComponent } from './component/group-dialog/group-dialog.component';
+import { PermissionGroupDialogComponent } from './component/permission-group-dialog/permission-group-dialog.component';
+import { PermissionUserDialogComponent } from './component/permission-user-dialog/permission-user-dialog.component';
+import { ViewerPortalComponent } from './component/viewer-portal/viewer-portal.component';
+import { FileReaderComponent } from './component/file-reader/file-reader.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +63,15 @@ import { HeaderComponent } from './component/header/header.component';
     MemberGroupComponent,
     ResourceComponent,
     HeaderComponent,
+    FileeditorComponent,
+    UserDialogComponent,
+    MemberDialrerComponent,
+    FileEditorComponent,
+    GroupDialogComponent,
+    PermissionGroupDialogComponent,
+    PermissionUserDialogComponent,
+    ViewerPortalComponent,
+    FileReaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +91,7 @@ import { HeaderComponent } from './component/header/header.component';
     HttpClientModule,
     MatRadioModule,
    MatTabsModule,
+   ReactiveFormsModule
 
   ],
   providers: [
@@ -83,7 +104,8 @@ import { HeaderComponent } from './component/header/header.component';
    MatMenuModule,
    MatIconModule,
    MatProgressSpinnerModule,
-   AuthGuard,   
+   AuthGuard,
+   AdminauthGuard,   
   ],
   bootstrap: [AppComponent]
 })

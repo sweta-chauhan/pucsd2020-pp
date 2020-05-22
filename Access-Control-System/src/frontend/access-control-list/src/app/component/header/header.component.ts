@@ -6,13 +6,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  username = localStorage.getItem('username')
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
     logout():void{
 	  	localStorage.clear()
-  	this.router.navigate(["/login"]);
+  	this.router.navigate([""]);
   	}
 }

@@ -1,43 +1,286 @@
 <app-header></app-header>
-
+<mat-tab-group>
+<mat-tab label= "User And Groups">
 <div class="login-page">
     <mat-card class="mat-elevation-z12">
         <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
             <mat-tab label="">
                 <mat-card-content>
                     <form action="">
-                    	<a [routerLink]="['/user']">
-                         <button mat-raised-button color="primary" class="lg" >User+</button>
-                     </a>
-                        <a [routerLink]="['/resource']">
+                    	<!--<a [routerLink]="['/user']">-->
+                         <button mat-raised-button color="primary" class="lg" (click)="addUser()">User+</button>
+                     <!--</a>-->
+                      <!--  <a [routerLink]="['/res']">
                         <button mat-raised-button color="primary" class="lg">Resource+
                         </button>
-                    </a>
-                        <a [routerLink]="['/group']">
-                        <button mat-raised-button color="primary" class="lg">Group+
+                    </a>-->
+                        <!--<a [routerLink]="['/group']">-->
+                        <button mat-raised-button color="primary" class="lg" (click)="addGroup()">Group+
                         </button>
-                    </a>
-                        <mat-card-content><br><br> Welcome {{username}}
-                        </mat-card-content>
-                         <button mat-raised-button color="primary" class="login-button">
-                Group Available</button>
+                    <!--</a>-->
+                         <!--<button mat-raised-button color="primary" class="login-button">
+                Group Available</button>-->
+<mat-card-content>
+    <div class="container">
+      <table class="table">
+        <thead>
+            <th>Profile</th>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <!--<th>Password</th>-->
+          <th>Is Sudo</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </thead>
+        <tr *ngFor="let user of allUsers">
+          <td><mat-icon >account_circle</mat-icon></td>
+          <td>{{user[0]}}</td>
+          <td>{{user[1]}}</td>
+          <td>{{user[2]}}</td>
+          <td>{{user[3]}}</td>
+          <td>{{user[4]}}</td>
+<!--          <td>{{user[5]}}</td>-->
+          <td>{{user[6]}}</td>
+          <td>
+            <button type="submit" class="btn btn-success"(click)="editUser(user[0])">
+            <mat-icon >edit</mat-icon>
+        </button>
+        </td>
+          <td>
+            <button type="submit" class="btn btn-success"(click)="deleteuser(user[0])">
+            <mat-icon >delete</mat-icon></button>
+    </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+<mat-card-content>
+    <div class="container">
+      <table class="table">
+        <thead>
+            <th>Profile</th>
+          <th>Id</th>
+          <th>Group Name</th>
+          <th>Edit</th>
+          <th>Add Members</th>
+          <th>Access</th>
+          <th>Delete</th>
+        </thead>
+        <tr *ngFor="let group of allGroups">
+            <td><mat-icon>supervised_user_circle</mat-icon></td>
+          <td>{{group[0]}}</td>
+          <td>{{group[1]}}</td>
+          <td>
+            <button type="submit" class="btn btn-success"(click)="editgroup(group[0])">
+            <mat-icon >
+              edit
+            </mat-icon>
+        </button>
+        </td>
+        <button type="submit" class="btn btn-success"(click)="addMembers(group[0])">
+        <td>
+          <mat-icon>
+            how_to_reg
+          </mat-icon></td>
+      </button>
+        <td><mat-icon>vpn_key</mat-icon></td>
+          <td>
+            <button type="submit" class="btn btn-success"(click)="deletegroup(group[0])">
+            <mat-icon >delete</mat-icon></button>
+        </td>
+        <td></td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-card-content>
+    <div class="container">
+      <table class="table">
+        <thead>
+            <th>Profile</th>
+          <th>Group Id</th>
+          <th>User Id</th>
+          <th>Revoke Access</th>
+          <th>Delete</th>
+        </thead>
+        <tr *ngFor="let grpusr of allGroupUser">
+          <td>
+            <mat-icon>
+              supervised_user_circle
+            </mat-icon>
+          </td>
+          <td>
+            {{grpusr[0]}}
+          </td>
+          <td>
+            {{grpusr[1]}}
+          </td>
+          <td>
+            <button type="submit" class="btn btn-success"(click)="editgroup(grpusr[0])">
+            <mat-icon >edit</mat-icon>
+        </button>
+        </td>
+        <td>
+          <button type="submit" class="btn btn-success"(click)="addMembers(grpusr[0])">
+          </button>
+        </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
 
-
-                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
-                UserAvailble
-
-              </button></a>
-                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
-                ResourceAvailble
-                
-
-              </button></a>
                     </form>
                 </mat-card-content>
             </mat-tab>
-
-
         </mat-tab-group>
-
     </mat-card>
 </div>
+</mat-tab>
+<mat-tab label = "File & Folder Explorer">
+<div class="login-page">
+    <mat-card class="mat-elevation-z12">
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+            <mat-tab label="">
+
+  
+<mat-card-content>
+    <div class="container">
+      <table class="table">
+        <thead>
+          <th>Icon</th>
+          <th>Id</th>
+          <th>Parent Id</th>
+          <th>Folder Name</th>
+          <th>Path</th>
+          <th>Create File/Folder</th>
+          <th>Rename Folder</th>
+          <th>Delete</th>
+          <th>User Permission</th>
+          <th>Group Permission</th>
+        </thead>
+        <tr *ngFor="let res of allResources">
+          <td *ngIf="res[1]==='2'">
+            <mat-icon >folder</mat-icon>
+          </td>
+          <td *ngIf="res[1]==='2'">
+            {{res[0]}}
+          </td>
+          <td *ngIf="res[1]==='2'">
+            {{res[2]}}
+          </td>
+          <td *ngIf="res[1]==='2'">
+            {{res[3]}}
+          </td>
+          <td *ngIf="res[1]==='2'">
+            {{res[4]}}
+          </td>
+          <td *ngIf="res[1]==='2'">
+              <button type="submit" class="btn btn-success"(click)="createfilefolder(res[0])">
+              <mat-icon>
+                create_new_folder
+              </mat-icon>
+            </button>
+          </td>
+          <td *ngIf="res[1]==='2'">
+              <button type="submit" class="btn btn-success"(click)="editgroup(res[0])">
+              <mat-icon>
+                edit
+              </mat-icon>
+            </button>
+          </td>
+          <td *ngIf="res[1]==='2'">
+            <button type="submit" class="btn btn-success"(click)="deletefolder(res[0])">
+              <mat-icon>
+                delete
+              </mat-icon>
+            </button>
+          </td >
+          <td *ngIf="res[1]==='2'">
+              <button type="submit" class="btn btn-success"(click)="userpermission(res[0])">
+              <mat-icon>
+                vpn_key
+              </mat-icon>
+            </button>
+          </td>
+          <td *ngIf="res[1]==='2'">
+              <button type="submit" class="btn btn-success"(click)="grouppermission(res[0])">
+              <mat-icon>
+                vpn_key
+              </mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>            
+<mat-card-content>
+    <div class="container">
+      <table class="table">
+        <thead>
+          <th>Icon</th>
+          <th>Id</th>
+          <th>Parent Id</th>
+          <th>File Name</th>
+          <th>Path</th>
+          <th>Edit</th><!--Editor Dialog Required-->
+          <th>Delete</th>
+          <th>User Permission</th>
+          <th>Group Permission</th>
+        </thead>
+        <tr *ngFor="let res of allResources">
+          <td *ngIf="res[1]==='1'">
+            <mat-icon >file_copy</mat-icon>
+          </td>
+          <td *ngIf="res[1]==='1'">
+            {{res[0]}}
+          </td>
+          <td *ngIf="res[1]==='1'">
+            {{res[2]}}
+          </td>
+          <td *ngIf="res[1]==='1'">
+            {{res[3]}}
+          </td>
+          <td *ngIf="res[1]==='1'">
+            {{res[4]}}
+          </td>
+          <td *ngIf="res[1]==='1'">
+              <button type="submit" class="btn btn-success"(click)="editfile(res[0])">
+              <mat-icon>
+                edit
+              </mat-icon>
+            </button>
+          </td>
+          <td *ngIf="res[1]==='1'">
+            <button type="submit" class="btn btn-success"(click)="deletefile(res[0])">
+              <mat-icon>
+                delete
+              </mat-icon>
+            </button>
+          </td >
+          <td *ngIf="res[1]==='1'">
+            <button type="submit" class="btn btn-success"(click)="userpermission(res[0])">
+              <mat-icon>
+                vpn_key
+              </mat-icon>
+            </button>
+          </td>
+          <td *ngIf="res[1]==='1'">
+            <button type="submit" class="btn btn-success"(click)="grouppermission(res[0])">
+              <mat-icon>
+                vpn_key
+              </mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+  </mat-tab>
+</mat-tab-group>
+</mat-card>
+</div>
+</mat-tab>
+</mat-tab-group>

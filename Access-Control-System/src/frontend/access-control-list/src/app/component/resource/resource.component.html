@@ -2,7 +2,7 @@
     <mat-card class="mat-elevation-z12">
         <mat-card-title style="text-align:center;">Resource Form</mat-card-title>
         <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
-            <mat-tab label="Sign In">
+            <mat-tab label="Resource Info">
                 <mat-card-content>
                     <form action="">
 
@@ -28,23 +28,22 @@
 
 
 
-                        <a routerLink="/registration"> <button mat-raised-button color="primary" class="login-button">
+                         <button mat-raised-button color="primary" (click)="create()"class="login-button">
                 Create
                 
 
-              </button></a>
+              </button>
 
 
-                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
+                         <button mat-raised-button color="warn" (click) = "delete()" class="login-button">
                 Delete
                 
 
-              </button></a>
-                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
+              </button> <button mat-raised-button color="warn" (click)="cancel()" class="login-button">
                 Cancel
                 
 
-              </button></a>
+              </button>
                     </form>
                 </mat-card-content>
             </mat-tab>

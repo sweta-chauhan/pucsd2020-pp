@@ -1,0 +1,55 @@
+/*Folder Operations*/
+createfilefolder(id){
+  /*Call file folder dialoger*/
+}
+
+renamefolder(id){
+  /*Call rename dialoger*/
+}
+
+/*Folder is tricky to handle*/
+/*Write one local function to check folder is empty*/
+
+isEmpty(id){
+  const index = this.allResources.findIndex(u => u[2]   === id );
+  return index === -1
+}
+
+deletefolder(id){
+ if (id === '1'){
+      alert("No one can delete Admin...")
+    }
+    else{
+    if (isEmpty(id)){
+      this.api.deleteResource(Number(id))
+        .subscribe((res) =>{
+        console.log("Folder Get Deleted...");
+      });
+      //delete entry from data structure
+      const index = this.allResources.findIndex(u => u[0]   === id );
+      this.allResources.splice(index,1);
+      }
+     else{
+      alert("Folder is not empty...")
+      }
+    } 
+}
+
+/*File Operations*/
+editfile(id){
+  /*file-editor*/
+}
+
+deletefile(id){
+    this.api.deleteResource(Number(id))
+        .subscribe((res) =>{
+        console.log("File Get Deleted...");
+      });
+      //delete entry from data structure
+      const index = this.allResources.findIndex(u => u[0]   === id );
+      this.allResources.splice(index,1);
+    }
+}
+
+/*Access Permission*/
+giveaccess(id){}

@@ -22,18 +22,25 @@ export class LoginComponent implements OnInit {
   user:User;
   ngOnInit() {
   }
+     
   login() : void {
-    this._api.getUserById(this.username)
-    .subscribe((res) => 
-        {
+    this._api.getUserById(this.username).subscribe(res =>  {
           this.user = res['data'];
           if (this.username == this.user.id && 
               this.password   == this.user.password) {
+              
               localStorage.setItem('id',this.user['id'].toString())
               localStorage.setItem('isAdmin',this.user['is_sudo'].toString())
               localStorage.setItem('username',this.user['first_name'])
-              
-            this.router.navigate(["userportal"]);
+             this.router.navigate(["userportal"]);
+             
+             if (this.user.is_sudo == 1){ 
+              //console.log("Here I am...");
+              this.router.navigate(["userportal"]);
+              }
+              else{
+                this.router.navigate(["viewerportal"]);
+              }
           }
           else {
                   alert("Invalid credentials");

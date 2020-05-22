@@ -10,14 +10,24 @@ import { GroupComponent } from './component/group/group.component';
 import { MemberGroupComponent } from './component/member-group/member-group.component';
 import { ResourceComponent } from './component/resource/resource.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminauthGuard } from './guards/adminauth.guard';
+
+
+import { FileeditorComponent } from './component/fileeditor/fileeditor.component';
+import { ViewerPortalComponent } from './component/viewer-portal/viewer-portal.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard]},
-  { path: 'userportal', component: UserportalComponent,canActivate: [AuthGuard] },
+  { path: 'userportal', component: UserportalComponent,canActivate: [AdminauthGuard] },
   { path: '', component: LoginComponent },
+  { path : 'group', component : GroupComponent,canActivate: [AdminauthGuard]},
+  { path : 'user', component : RegisterUserComponent,canActivate: [AdminauthGuard]},
+  { path : 'viewerportal', component :ViewerPortalComponent, canActivate: [AuthGuard]}
+  
+  /*{ path : 'member', component : MemberGroupComponent,canActivate: [AuthGuard]},
   { path: 'resource',  component: ResourceComponent,canActivate: [AuthGuard]},
-  { path : 'group', component : GroupComponent,canActivate: [AuthGuard]},
-  { path : 'user', component : RegisterUserComponent,canActivate: [AuthGuard]},
+  { path : 'res',component :ResourceComponent,canActivate: [AuthGuard]},
+  {path : 'file',component :FileeditorComponent}*/
 ];
 @NgModule({
   imports: [
@@ -27,7 +37,6 @@ const routes: Routes = [
     RouterModule
   ],
   declarations: [
-    
   ]
 })
 export class AppRoutingModule { }
