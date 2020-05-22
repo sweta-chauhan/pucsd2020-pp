@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+	"fmt"
 	"github.com/go-chi/chi"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/handler"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/model"
@@ -51,7 +52,9 @@ func (user *User) GetByID(w http.ResponseWriter, r *http.Request) {
 func (user *User) Create(w http.ResponseWriter, r *http.Request) {
 	var usr model.User	
 	err := json.NewDecoder(r.Body).Decode(&usr)
+	fmt.Printf("Hello Create Group resquest came.")
 	for {
+
 		if nil != err {
 			break
 		}

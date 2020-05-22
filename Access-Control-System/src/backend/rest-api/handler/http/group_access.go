@@ -42,7 +42,7 @@ func (groupaccess *GroupAccessEntry) GetByID(w http.ResponseWriter, r *http.Requ
 			break
 		}
 		
-		grp, err = groupaccess.repo.GetByID(r.Context(), id)
+		grp, err = groupaccess.repo.GetByAnyCol(r.Context(), "id",id)
 		break
 	}
 	handler.WriteJSONResponse(w, r, grp, http.StatusOK, err)
