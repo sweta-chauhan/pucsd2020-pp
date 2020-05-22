@@ -9,7 +9,8 @@ import (
 	"reflect"
 	"strings"
 	"time"
-
+	//"path/filepath"
+	//"io/ioutil"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/config"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/model"
 
@@ -56,7 +57,11 @@ func GetPlaceHolder(count int) string {
 	}
 	return ""
 }
-
+/*
+func removeNullCol(columns []string{}, params []interface{}){
+	
+	return columns,params
+}*/
 /**
  * Insert new row
  */
@@ -67,28 +72,33 @@ func Create(conn *sql.DB, object model.IModel) (sql.Result, error) {
 	rType := reflect.TypeOf(object)
 	columns := []string{}
 	var params []interface{}
-
-	count := 0
 	for idx := 0; idx < rValue.Elem().NumField(); idx++ {
 		field := rType.Elem().Field(idx)
 		value := rValue.Elem().Field(idx)
 		if  COLUMN_INGNORE_FLAG == field.Tag.Get("autoincr") ||
-			COLUMN_INGNORE_FLAG == field.Tag.Get("ignore") {
+			COLUMN_INGNORE_FLAG == field.Tag.Get("ignore"){
 			continue
 		}
-
 		column := field.Tag.Get("column")
 		columns = append(columns, column)
 		params = append(params, value.Interface())
-		count++
+
 	}
+	//columns,params = removeNullCol(columns,params)
+	for i, v := range columns {
+ 		   if v == "" {
+        	columns = append(columns[:i], columns[i+1:]...)
+        	params = append(params[:i], params[i+1:]...)
+        	break
+    		}
+		}
 	var queryBuffer bytes.Buffer
 	queryBuffer.WriteString("INSERT INTO ")
 	queryBuffer.WriteString(object.Table())
 	queryBuffer.WriteString("(")
 	queryBuffer.WriteString(strings.Join(columns, ", "))
 	queryBuffer.WriteString(") VALUES(")
-	queryBuffer.WriteString(GetPlaceHolder(count))
+	queryBuffer.WriteString(GetPlaceHolder(len(columns)))
 	queryBuffer.WriteString(");")
 
 	query := queryBuffer.String()
@@ -98,7 +108,6 @@ func Create(conn *sql.DB, object model.IModel) (sql.Result, error) {
 			err.Error(), object.String(), query)
 		return nil, err
 	}
-
 	defer stmt.Close()
 	result, err := stmt.Exec(params...)
 	if nil != err {
@@ -108,7 +117,15 @@ func Create(conn *sql.DB, object model.IModel) (sql.Result, error) {
 	}
 	return result, nil
 }
+/*
+func CreateFile(type bool,resourcename string, parentpath string){
+		
+}
 
+func ReadFile(){
+
+}
+*/
 /**
  * Update existing row with key column
  */
@@ -137,14 +154,17 @@ func UpdateById(conn *sql.DB, object model.IModel) error {
 			keyParams = append(keyParams, value.Interface())
 
 		} else {
+			if column!=""{
 			columns = append(columns, column+" = ?")
 			params = append(params, value.Interface())
+			}
 		}
 	}
 
 	for _, param := range keyParams {
 		params = append(params, param)
 	}
+
 
 	var queryBuffer bytes.Buffer
 	queryBuffer.WriteString("UPDATE ")
@@ -172,76 +192,6 @@ func UpdateById(conn *sql.DB, object model.IModel) error {
 
 	return err
 }
-
-
-/**
- * Update existing row with key column
- */
-func UpdateByEmail(conn *sql.DB, object model.IModel) error {
-	log.Printf("Reading object values to update from interface type using reflection")
-
-
-	rValue := reflect.ValueOf(object)
-	rType := reflect.TypeOf(object)
-
-	columns := []string{}
-	var params []interface{}
-
-	keyColumns := []string{}
-	var keyParams []interface{}
-
-	for idx := 0; idx < rValue.Elem().NumField(); idx++ {
-		field := rType.Elem().Field(idx)
-		value := rValue.Elem().Field(idx)
-
-		/*if value.IsNil() ||
-			COLUMN_INGNORE_FLAG == field.Tag.Get("ignore") {
-			continue
-		}*/
-
-		column := field.Tag.Get("column")
-		if COLUMN_PRIMARY == field.Tag.Get("key") {
-			keyColumns = append(keyColumns, column+" = ?")
-			keyParams = append(keyParams, value.Interface())
-
-		} else {
-			columns = append(columns, column+" = ?")
-			params = append(params, value.Interface())
-		}
-	}
-
-	for _, param := range keyParams {
-		params = append(params, param)
-	}
-
-	var queryBuffer bytes.Buffer
-	queryBuffer.WriteString("UPDATE ")
-	queryBuffer.WriteString(object.Table())
-	queryBuffer.WriteString(" SET ")
-	queryBuffer.WriteString(strings.Join(columns, ", "))
-	queryBuffer.WriteString(" WHERE ")
-	queryBuffer.WriteString(strings.Join(keyColumns, ", "))
-	queryBuffer.WriteString(";")
-
-	query := queryBuffer.String()
-	//	log.Println("Update statement is: %s", query)
-	stmt, err := conn.Prepare(query)
-	if nil != err {
-		log.Printf("Update Syntax Error: %s\n\tError Query: %s : %s\n",
-			err.Error(), object.String(), query)
-		return err
-	}
-
-	defer stmt.Close()
-	_, err = stmt.Exec(params...)
-	if nil != err {
-		log.Printf("Update Execute Error: %s\nError Query: %s : %s\n",
-			err.Error(), object.String(), query)
-	}
-
-	return err
-}
-
 
 func GetById(conn *sql.DB, object model.IModel, id int64) (model.IModel, error) {
 	rValue := reflect.ValueOf(object)
@@ -260,6 +210,15 @@ func GetById(conn *sql.DB, object model.IModel, id int64) (model.IModel, error) 
 		columns = append(columns, column)
 		pointers = append(pointers, rValue.Elem().Field(idx).Addr().Interface())
 	}
+	//log.Println(len(columns))
+	for i, v := range columns {
+ 		   if v == "" {
+        	columns = append(columns[:i], columns[i+1:]...)
+        	pointers = append(pointers[:i], pointers[i+1:]...)
+        	break
+    		}
+		}
+
 
 	var queryBuffer bytes.Buffer
 
@@ -376,7 +335,13 @@ func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface
 	}
 	var queryBuffer bytes.Buffer
 	var params []interface{}
-
+	for i, v := range columns {
+ 		   if v == "" {
+        	columns = append(columns[:i], columns[i+1:]...)
+        	//pointers = append(pointers[:i], pointers[i+1:]...)
+        	break
+    		}
+		}
 	queryBuffer.WriteString("SELECT ")
 	queryBuffer.WriteString(strings.Join(columns, ", "))
 	queryBuffer.WriteString(" FROM ")
