@@ -66,7 +66,7 @@
           <th>Group Name</th>
           <th>Edit</th>
           <th>Add Members</th>
-          <th>Access</th>
+          <!--<th>Access</th>-->
           <th>Delete</th>
         </thead>
         <tr *ngFor="let group of allGroups">
@@ -86,7 +86,7 @@
             how_to_reg
           </mat-icon></td>
       </button>
-        <td><mat-icon>vpn_key</mat-icon></td>
+        <!--<td><mat-icon>vpn_key</mat-icon></td>-->
           <td>
             <button type="submit" class="btn btn-success"(click)="deletegroup(group[0])">
             <mat-icon >delete</mat-icon></button>
@@ -103,8 +103,8 @@
             <th>Profile</th>
           <th>Group Id</th>
           <th>User Id</th>
-          <th>Revoke Access</th>
-          <th>Delete</th>
+         <!-- <th>Revoke Access</th>
+          <th>Delete</th>-->
         </thead>
         <tr *ngFor="let grpusr of allGroupUser">
           <td>
@@ -118,7 +118,7 @@
           <td>
             {{grpusr[1]}}
           </td>
-          <td>
+          <!--<td>
             <button type="submit" class="btn btn-success"(click)="editgroup(grpusr[0])">
             <mat-icon >edit</mat-icon>
         </button>
@@ -126,7 +126,7 @@
         <td>
           <button type="submit" class="btn btn-success"(click)="addMembers(grpusr[0])">
           </button>
-        </td>
+        </td>-->
         </tr>
       </table>
     </div>
