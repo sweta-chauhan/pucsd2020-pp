@@ -1,0 +1,124 @@
+<app-header></app-header>
+<mat-tab-group>
+	<mat-tab label="Members">
+    <table>
+      <thead>
+          <th>Icon</th>
+          <th>Group Id</th>
+        </thead>
+        <tr *ngFor="let grp of alluserGroups">
+          <td>
+            <mat-icon>
+              supervised_user_circle
+            </mat-icon>
+          </td>
+          <td>
+            {{grp[0]}}
+          </td>
+        </tr>
+      </table>
+	</mat-tab>
+	<mat-tab label="Files">
+<mat-card>
+<mat-card-content>
+    <div class="container">
+      <table class="table">
+        <thead>
+          <th>Icon</th>
+          <th>Id</th>
+          <th>Parent Id</th>
+          <th>File Name</th>
+          <th>Path</th>
+          <th>Edit</th><!--Editor Dialog Required-->
+          <th>Delete</th>
+        </thead>
+        <tr *ngFor="let res of allResources">
+          <td *ngIf="res[1]==='1'">
+            <mat-icon >file_copy</mat-icon>
+          </td>
+          <td *ngIf="res[1]==='1'">
+            {{res[0]}}
+          </td>
+          <td *ngIf="res[1]==='1'">
+            {{res[2]}}
+          </td>
+          <td *ngIf="res[1]==='1'">
+            {{res[3]}}
+          </td>
+          <td *ngIf="res[1]==='1'">
+            {{res[4]}}
+          </td>
+          <td *ngIf="res[1]==='1'">
+              <button type="submit" class="btn btn-success"(click)="editfile(res[0])">
+              <mat-icon>
+                edit
+              </mat-icon>
+            </button>
+          </td>
+          <td *ngIf="res[1]==='1'">
+            <button type="submit" class="btn btn-success"(click)="filedelete(res[0])">
+              <mat-icon>
+                delete
+              </mat-icon>
+            </button>
+          </td >
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+  </mat-card>
+ </mat-tab>		
+	<mat-tab label="Folder">
+		<div class="login-page">
+    		<mat-card class="mat-elevation-z12">
+				<mat-card-content>
+    				<div class="container">
+      					<table class="table">
+        					<thead>
+          						<th>Icon</th>
+          							<th>Id</th>
+          								<th>Parent Id</th>
+          								<th>Folder Name</th>
+          								<th>Path</th>
+          								<th>Create File/Folder</th>
+          								<!--<th>Rename Folder</th>-->
+          								<th>Delete</th> 			
+        					</thead>
+        				<tr *ngFor="let res of allResources">
+          				<td *ngIf="res[1]==='2'">
+            				<mat-icon >folder</mat-icon>
+          					</td>
+          					<td *ngIf="res[1]==='2'">
+            					{{res[0]}}
+          					</td>
+          					<td *ngIf="res[1]==='2'">
+            						{{res[2]}}
+					          </td>
+          					<td *ngIf="res[1]==='2'">
+            						{{res[3]}}
+					        </td>
+          					<td *ngIf="res[1]==='2'">
+            						{{res[4]}}
+          					</td>
+          					<td *ngIf="res[1]==='2'">
+              					<button type="submit" class="btn btn-success"(click)="create(res[0])">
+              					<mat-icon>
+                					create_new_folder
+              					</mat-icon>
+            					</button>
+          						</td>
+          					<td *ngIf="res[1]==='2'">
+            					<button type="submit" class="btn btn-success"(click)="folderdelete(res[0])">
+              					<mat-icon>
+                					delete
+              					</mat-icon>
+            					</button>
+          					</td >
+        				</tr>
+      				</table>
+    			</div>
+  			</mat-card-content>
+  		</mat-card>
+	</div>
+	</mat-tab>
+</mat-tab-group>            

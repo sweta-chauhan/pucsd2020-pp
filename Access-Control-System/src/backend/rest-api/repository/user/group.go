@@ -2,6 +2,7 @@ package user
 
 import (		
 	"context"
+	//"log"
 	"database/sql"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/driver"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/model"

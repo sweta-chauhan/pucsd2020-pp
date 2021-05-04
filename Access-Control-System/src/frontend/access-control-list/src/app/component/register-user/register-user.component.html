@@ -1,0 +1,120 @@
+<!--
+<app-header></app-header>
+<div class="login-page">
+    <mat-card class="mat-elevation-z12">
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+            <mat-tab label="User Details">
+                <mat-card-content>
+                    <form (submit)="create()">
+                        <mat-form-field>
+                            <input matInput placeholder="First name" [(ngModel)]="firstname" name="firstname" required>
+
+                            <mat-icon matSuffix>FirstName</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="LastName" [(ngModel)]="lastname" name="lastname" required>
+
+                            <mat-icon matSuffix></mat-icon>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Email" [(ngModel)]="email" name="email"required>
+                            
+                            <mat-icon matSuffix>email</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="User Name" [(ngModel)]="username" name="username"required>
+                            
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input matInput placeholder="Password" type="password"  minlength="6" [(ngModel)]="password" name="password" required >
+                            
+                        </mat-form-field>
+                        <!--
+                        <mat-radio-group><br> Is Sudo:<br>
+
+                            <mat-radio-button value="Y">Yes</mat-radio-button>&emsp;&emsp;
+
+
+                            <mat-radio-button value="N">No</mat-radio-button>
+
+                        </mat-radio-group>
+                        
+                         <button type="submit" color="primary" >
+                Create
+                
+
+              </button>
+
+
+                      <!--  <button mat-raised-button class="login-button" (click)="update()">
+                Update
+              </button>
+                       Yahan se  <button mat-raised-button color="warn" class="login-button" (click)="cancel()">
+                Cancel
+                
+
+              </button>
+                    </form>
+                </mat-card-content>
+            </mat-tab>
+
+
+        </mat-tab-group>
+
+    </mat-card>
+</div>
+-->
+
+<mat-card-header>
+  <mat-toolbar class="toolbar">
+    <mat-card-title>Register User</mat-card-title>
+    <span class="toolbar-spacer"></span>
+    <mat-icon (click)="onNoClick()">cancel</mat-icon>
+  </mat-toolbar>
+</mat-card-header>
+<mat-card-content>
+  <div class="login-page">
+    <form [formGroup]="userForm" (submit)="onSubmit()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>User Id</label>
+            <input type="text" formControlName="id" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>Username</label>
+            <input type="text" formControlName="username" class="form-control">
+          </div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>First Name</label>
+            <input type="text" formControlName="first_name" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>Last Name</label>
+            <input type="text" formControlName="last_name" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Password</label>
+            <input type="password" formControlName="password" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>Email</label>
+            <input type="text" formControlName="email" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+          <button type="submit" class="btn btn-success">
+            <mat-icon>save</mat-icon>
+          </button>
+          </div>
+        </div>
+    </div>
+</form>
+</div>
+</mat-card-content>

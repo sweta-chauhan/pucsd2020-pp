@@ -1,0 +1,52 @@
+<mat-card-header>
+  <mat-toolbar class="toolbar">
+    <mat-card-title>User Details</mat-card-title>
+    <span class="toolbar-spacer"></span>
+    <mat-icon (click)="onNoClick()">cancel</mat-icon>
+  </mat-toolbar>
+</mat-card-header>
+<mat-card-content>
+  <div class="login-page">
+    <form [formGroup]="userForm" (submit)="onSubmit()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>User Id</label>
+            <input type="text" formControlName="id" class="form-control" readonly="isReadOnly">
+          </div>
+          <div class="col-md-6">
+            <label>Username</label>
+            <input type="text" formControlName="username" class="form-control">
+          </div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>First Name</label>
+            <input type="text" formControlName="first_name" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>Last Name</label>
+            <input type="text" formControlName="last_name" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Password</label>
+            <input type="password" formControlName="password" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>Email</label>
+            <input type="text" formControlName="email" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+          <button type="submit" class="btn btn-success">
+            <mat-icon>save</mat-icon>
+          </button>
+          </div>
+        </div>
+    </div>
+</form>
+</div>
+</mat-card-content>

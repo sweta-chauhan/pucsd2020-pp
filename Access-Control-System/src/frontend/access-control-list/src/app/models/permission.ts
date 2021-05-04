@@ -1,5 +1,5 @@
 export class Permission {
-    id		    int;
-    p_read 	    int;
-    p_write 	int;
+    id: number;
+    p_read: number;
+    p_write: number;
 }

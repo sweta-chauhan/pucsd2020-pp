@@ -54,6 +54,7 @@ func createRouterGroup(router *chi.Mux) {
 			for _, hlr := range hdlr.GetHTTPHandler() {
 				path := fmt.Sprintf("/webapi/v1/%s", hlr.Path)
 				switch hlr.Method {
+
 				case http.MethodGet:
 					r.Get(path, hlr.Func)
 				case http.MethodPost:
@@ -75,9 +76,11 @@ func createRouterGroup(router *chi.Mux) {
 
 func main() {
 	router := chi.NewRouter()
+	
 	router.Use(middleware.Recoverer)
 	router.Use(middleware.Logger)
 	createRouterGroup(router)
+
 	http.ListenAndServe(fmt.Sprintf("%s:%d",
 		config.Config().Host, config.Config().Port),router)
 }

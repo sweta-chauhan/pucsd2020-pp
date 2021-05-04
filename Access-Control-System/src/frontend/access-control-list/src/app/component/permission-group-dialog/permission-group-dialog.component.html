@@ -1,0 +1,59 @@
+<mat-card-header>
+  <mat-toolbar class="toolbar">
+    <mat-card-title>Group Permissions</mat-card-title>
+    <span class="toolbar-spacer"></span>
+    <button >
+    	<mat-icon (click)="onNoClick()">
+    		cancel
+    	</mat-icon>
+	</button>
+  </mat-toolbar>
+</mat-card-header>
+
+<mat-card-content>
+  <div class="login-page">
+    <form [formGroup]="grouppermissionForm" (submit)="onSubmit()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Resource Id</label>
+            <input type="text" formControlName="resource_id" class="form-control" readonly="isReadOnly">
+          </div>
+          <div class="row">
+          <div class="col-md-6">
+                    <label>
+                        Group Id
+                    </label>
+                    <div style="width:100px;">
+                    <select formControlName="group_id" >
+                        <option *ngFor = "let i of group_id" [value]="i" >      
+                            {{i}}    
+                        </option>
+                    </select>
+                </div>
+                </div>
+                <div class="col-md-6">
+                    <label>
+                        Access Type
+                    </label>
+                    <div style="width:100px;">
+                    <select formControlName="permission" >
+                        <option *ngFor = "let pd of permission" [value]="pd" >      
+                            {{pd}}    
+                        </option>
+                    </select>
+                </div>
+                </div>
+           </div>
+          <div class="row">
+          <div class="col-md-6">
+          <button type="submit" class="btn btn-success">
+            <mat-icon>save</mat-icon>
+          </button>
+          </div>
+        </div>
+      </div>
+  </div>
+</form>
+</div>
+</mat-card-content>

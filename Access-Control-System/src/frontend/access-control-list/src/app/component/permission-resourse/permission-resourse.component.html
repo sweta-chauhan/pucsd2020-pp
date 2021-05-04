@@ -1,0 +1,47 @@
+<app-header></app-header>
+<div class="login-page">
+    <mat-card class="mat-elevation-z12">
+        <mat-card-title style="text-align:center;">Resouce To Access</mat-card-title>
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+            <mat-tab label="Sign In">
+                <mat-card-content>
+                    <form action="">
+
+
+                        <mat-form-field>
+                            <input matInput placeholder="Group Id" [(ngModel)]="groupid" name="groupid" required>
+
+                            <mat-icon matSuffix>Group </mat-icon>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="User Id" [(ngModel)]="userid" name="userid" required>
+
+                            <mat-icon matSuffix>User </mat-icon>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="access" [(ngModel)]="access" name="access">
+                            <mat-icon matSuffix>lock</mat-icon>
+                        </mat-form-field>
+                        <a routerLink="/registration"> <button mat-raised-button color="primary" class="login-button">
+                Give Access
+              </button></a>
+
+                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
+                Deletion
+                
+
+              </button></a>
+                        <a routerLink="/registration"> <button mat-raised-button color="warn" class="login-button">
+                Cancel
+                
+
+              </button></a>
+                    </form>
+                </mat-card-content>
+            </mat-tab>
+
+
+        </mat-tab-group>
+
+    </mat-card>
+</div>

@@ -4,8 +4,9 @@ import (
 	"os"
 	"path/filepath"
 	"context"
-	//"fmt"
 	"database/sql"
+	//"log"
+	//"bytes"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/driver"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/model"
 	"io/ioutil"
@@ -28,9 +29,15 @@ func (resource *resourceRepository) GetByID(cntx context.Context, id int64) (int
 		filename := obj.ResourceName
 		data, err := ioutil.ReadFile(filepath.Join(basepath,filename))
   		if err != nil {
+    		
     		return nil,err
   		}
-		obj.Data = string(data)
+
+  		if(len(data)>0){
+  			obj.Data = string(data)
+  		} else{
+  			obj.Data =" "
+  		}
 	}
 	return result,err 
 }
@@ -38,9 +45,11 @@ func (resource *resourceRepository) GetByID(cntx context.Context, id int64) (int
 func (resource *resourceRepository) Create(cntx context.Context, obj interface{}) (interface{}, error) {
 	usr := obj.(model.Resource)
 	/*lines to create resource on server*/
+	//log.Println(usr)
 	if usr.ResourceType == 1 {
 	basepath := usr.ResourcePath
 	filename := usr.ResourceName 
+	//log.Println(filename)
 	dst,_ := os.Create(filepath.Join(basepath, filename, "/"))
 	defer dst.Close()
 	}
@@ -54,9 +63,7 @@ func (resource *resourceRepository) Create(cntx context.Context, obj interface{}
 		if errDir != nil {
 			return 0, err
 		}
-	
 	}
-
 	}
 	result, err := driver.Create(resource.conn, &usr)
 	if nil != err {

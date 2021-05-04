@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"net/http"
+	//"log"
 	"strconv"
 	"github.com/go-chi/chi"
 	"github.com/pucsd2020-pp/Access-Control-System/src/backend/rest-api/handler"
@@ -26,12 +27,13 @@ func NewGroupHandler(conn *sql.DB) *Group {
 
 func (group *Group) GetHTTPHandler() []*handler.HTTPHandler {
 	return []*handler.HTTPHandler{
-		&handler.HTTPHandler{Authenticated: false, Method: http.MethodGet, Path: "group/{id}", Func: group.GetByID},
-		&handler.HTTPHandler{Authenticated: false, Method: http.MethodPost, Path: "group", Func: group.Create},
-		&handler.HTTPHandler{Authenticated: false, Method: http.MethodPut, Path: "group/{id}", Func: group.Update},
-		&handler.HTTPHandler{Authenticated: false, Method: http.MethodDelete, Path: "group/{id}", Func: group.Delete},
-		&handler.HTTPHandler{Authenticated: false, Method: http.MethodGet, Path: "group", Func: group.GetAll},
-		&handler.HTTPHandler{Authenticated: false, Method: http.MethodPatch, Path: "group/{id}", Func: group.Update},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "group/{id}", Func: group.GetByID},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPost, Path: "group", Func: group.Create},
+		//&handler.HTTPHandler{Authenticated: true, Method: http.MethodOptions, Path: "group", Func: group.Create},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPut, Path: "group/{id}", Func: group.Update},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodDelete, Path: "group/{id}", Func: group.Delete},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "group", Func: group.GetAll},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPatch, Path: "group/{id}", Func: group.Update},
 	}
 }
 func (group *Group) GetByID(w http.ResponseWriter, r *http.Request) {
@@ -49,7 +51,7 @@ func (group *Group) GetByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (group *Group) Create(w http.ResponseWriter, r *http.Request) {
-	var grp model.Group	
+	var grp model.Group
 	err := json.NewDecoder(r.Body).Decode(&grp)
 	for {
 		if nil != err {

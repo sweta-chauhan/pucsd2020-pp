@@ -1,0 +1,55 @@
+<div class="login-page">
+    <mat-card class="mat-elevation-z12">
+        <mat-card-title style="text-align:center;">Resource Form</mat-card-title>
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+            <mat-tab label="Resource Info">
+                <mat-card-content>
+                    <form action="">
+
+                        <mat-radio-group><br> Resource Type:<br>
+
+                            <mat-radio-button value="A">File</mat-radio-button>&emsp;&emsp;
+
+
+                            <mat-radio-button value="N">Folder</mat-radio-button>
+
+                        </mat-radio-group>
+
+                        <mat-form-field>
+                            <input matInput placeholder="Resource Name"  [(ngModel)]="ResourceName" name="ResourceName" required>
+
+                            <mat-icon matSuffix>Resource Location</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Resource Path" [(ngModel)]="ResourcePath"  name="ResourcePath" required>
+
+                            <mat-icon matSuffix>Resource Path</mat-icon>
+                        </mat-form-field>
+
+
+
+                         <button mat-raised-button color="primary" (click)="create()"class="login-button">
+                Create
+                
+
+              </button>
+
+
+                         <button mat-raised-button color="warn" (click) = "delete()" class="login-button">
+                Delete
+                
+
+              </button> <button mat-raised-button color="warn" (click)="cancel()" class="login-button">
+                Cancel
+                
+
+              </button>
+                    </form>
+                </mat-card-content>
+            </mat-tab>
+
+
+        </mat-tab-group>
+
+    </mat-card>
+</div>

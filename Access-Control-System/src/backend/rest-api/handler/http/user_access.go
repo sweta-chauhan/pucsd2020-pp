@@ -42,7 +42,7 @@ func (useraccess *UserAccessEntry) GetByID(w http.ResponseWriter, r *http.Reques
 			break
 		}
 		
-		grp, err = useraccess.repo.GetByID(r.Context(), id)
+		grp, err = useraccess.repo.GetByAnyCol(r.Context(),"id", id)
 		break
 	}
 	handler.WriteJSONResponse(w, r, grp, http.StatusOK, err)
